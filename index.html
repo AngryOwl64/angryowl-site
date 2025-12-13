@@ -12,100 +12,36 @@
       --max: 1050px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0; font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text); background:radial-gradient(1200px 600px at 20% 0%, #14233a 0%, var(--bg) 60%);
+      color:var(--text); background:#0b0f14;
     }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:20px}
     header{
-      position:sticky; top:0; z-index:10; backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      position:sticky; top:0;
+      background:#0b0f14;
       border-bottom:1px solid var(--border);
     }
     .topbar{display:flex; align-items:center; gap:14px; padding:14px 20px; max-width:var(--max); margin:0 auto;}
-    .brand{display:flex; flex-direction:column; gap:2px; text-decoration:none}
-    .brand strong{font-size:18px; letter-spacing:.2px}
-    .brand span{color:var(--muted); font-size:13px}
-    nav{margin-left:auto; display:flex; gap:10px; flex-wrap:wrap}
-    nav a{
-      padding:8px 10px; border:1px solid transparent; border-radius:10px; text-decoration:none; color:var(--muted);
-    }
-    nav a:hover{border-color:var(--border); color:var(--text)}
+    nav{margin-left:auto; display:flex; gap:10px}
+    nav a{text-decoration:none; color:var(--muted)}
+    nav a:hover{color:var(--text)}
     main{padding:22px 0 40px}
-    .grid{
-      display:grid; gap:18px;
-      grid-template-columns: 1fr;
-    }
-    @media (min-width: 900px){
-      .grid{grid-template-columns: 2fr 1fr}
-    }
+    .grid{display:grid; gap:18px}
+    @media (min-width:900px){.grid{grid-template-columns:2fr 1fr}}
     .card{
-      background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), var(--card));
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
-    .hero{
-      display:flex; flex-direction:column; gap:12px;
-      padding:18px;
-      border-radius:18px;
-      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--accent2) 20%, transparent));
-      border:1px solid color-mix(in srgb, var(--border) 70%, transparent);
-    }
-    .hero h1{margin:0; font-size:26px}
-    .hero p{margin:0; color:var(--muted)}
-    .controls{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:8px
-    }
-    input[type="search"]{
-      flex:1; min-width: 220px;
-      padding:10px 12px;
-      background: #0a1220;
-      border:1px solid var(--border);
-      border-radius:12px;
-      color:var(--text);
-      outline:none;
-    }
-    input[type="search"]:focus{border-color: color-mix(in srgb, var(--accent) 70%, var(--border))}
-    select{
-      padding:10px 12px;
-      background: #0a1220;
-      border:1px solid var(--border);
-      border-radius:12px;
-      color:var(--text);
-      outline:none;
+      background:#111826; border:1px solid var(--border);
+      border-radius:16px; padding:16px;
     }
     .post{
-      display:flex; flex-direction:column; gap:8px;
-      padding:14px;
       border:1px solid var(--border);
       border-radius:14px;
-      background: color-mix(in srgb, var(--card) 92%, transparent);
+      padding:14px;
+      margin-bottom:14px;
     }
-    .post h2{margin:0; font-size:18px}
-    .meta{display:flex; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:13px}
-    .tag{
-      display:inline-flex; align-items:center;
-      padding:3px 8px; border-radius:999px;
-      border:1px solid var(--border);
-      color:var(--muted);
-    }
-    .excerpt{margin:0; color:color-mix(in srgb, var(--text) 85%, var(--muted))}
-    .readmore{
-      margin-top:6px;
-      align-self:flex-start;
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      text-decoration:none;
-      color:var(--text);
-    }
-    .readmore:hover{border-color: color-mix(in srgb, var(--accent) 70%, var(--border))}
-    aside .section-title{margin:0 0 10px; font-size:14px; color:var(--muted); letter-spacing:.3px; text-transform:uppercase}
-    .pill-row{display:flex; gap:8px; flex-wrap:wrap}
+    .post h2{margin:0 0 6px}
+    .meta{font-size:13px; color:var(--muted)}
     footer{
       border-top:1px solid var(--border);
       color:var(--muted);
@@ -113,320 +49,120 @@
       max-width:var(--max);
       margin:0 auto;
     }
-
-    /* Modal */
     dialog{
       width:min(860px, 92vw);
       border:1px solid var(--border);
       border-radius:16px;
-      padding:0;
-      background: var(--card);
-      color: var(--text);
-      box-shadow: 0 25px 70px rgba(0,0,0,.55);
+      background:#111826;
+      color:var(--text);
     }
-    dialog::backdrop{background: rgba(0,0,0,.55)}
-    .modal-head{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 16px; border-bottom:1px solid var(--border);
-      background: color-mix(in srgb, var(--card) 92%, transparent);
-    }
-    .modal-head strong{font-size:16px}
     .close-btn{
-      appearance:none; border:1px solid var(--border);
-      background:#0a1220; color:var(--text);
-      border-radius:12px; padding:8px 10px; cursor:pointer;
+      border:1px solid var(--border);
+      background:#0b0f14;
+      color:var(--text);
+      border-radius:10px;
+      padding:6px 10px;
+      cursor:pointer;
     }
-    .close-btn:hover{border-color: color-mix(in srgb, var(--accent) 70%, var(--border))}
-    .modal-body{padding:16px}
-    .modal-meta{color:var(--muted); font-size:13px; margin:0 0 14px}
-    .modal-content{white-space:pre-wrap}
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="topbar">
-      <a class="brand" href="#home" aria-label="Startseite">
-        <strong>Mein Blog</strong>
-        <span>Minimaler Blog (HTML/CSS/JS)</span>
-      </a>
-      <nav aria-label="Navigation">
-        <a href="#home">Home</a>
-        <a href="#posts">Posts</a>
-        <a href="#about">Über</a>
-      </nav>
-    </div>
-  </header>
-
-  <div class="wrap">
-    <main class="grid" id="home">
-      <section>
-        <div class="hero card">
-          <h1>Blogging Website</h1>
-          <p>Suche und filtere Posts. Öffne einen Artikel im Popup. Alles in einer Datei.</p>
-
-          <div class="controls" role="search">
-            <input id="search" type="search" placeholder="Suchen (Titel, Text, Tags) …" autocomplete="off" />
-            <select id="tagFilter" aria-label="Tag-Filter">
-              <option value="all">Alle Tags</option>
-            </select>
-            <select id="sort" aria-label="Sortierung">
-              <option value="new">Neueste zuerst</option>
-              <option value="old">Älteste zuerst</option>
-              <option value="az">Titel A–Z</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="card" id="posts" style="margin-top:18px;">
-          <div id="postList" aria-live="polite"></div>
-        </div>
-      </section>
-
-      <aside>
-        <div class="card" id="about">
-          <p class="section-title">Über</p>
-          <p style="margin:0; color:var(--muted);">
-            Vorlage für einen Blog. Für echte Kommentare/Accounts brauchst du ein Backend (z. B. Node.js/PHP) oder ein
-            statisches System (z. B. Hugo/Jekyll).
-          </p>
-        </div>
-
-        <div class="card" style="margin-top:18px;">
-          <p class="section-title">Tags</p>
-          <div class="pill-row" id="tagPills"></div>
-        </div>
-      </aside>
-    </main>
+<header>
+  <div class="topbar">
+    <strong>Mein Blog</strong>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+    </nav>
   </div>
+</header>
 
-  <footer>
-    © <span id="year"></span> Mein Blog — Demo ohne Backend
-  </footer>
+<div class="wrap">
+<main class="grid" id="home">
+<section>
+<div class="card" id="posts">
+<div id="postList"></div>
+</div>
+</section>
 
-  <dialog id="postModal" aria-label="Artikel">
-    <div class="modal-head">
-      <strong id="modalTitle">Artikel</strong>
-      <button class="close-btn" id="closeModal" type="button">Schließen</button>
-    </div>
-    <div class="modal-body">
-      <p class="modal-meta" id="modalMeta"></p>
-      <div class="modal-content" id="modalContent"></div>
-    </div>
-  </dialog>
+<aside>
+<div class="card">
+<p style="color:var(--muted); margin:0">
+Dieser Blog enthält Beispielartikel und sachliche Community-Updates ohne Anspruch auf Vollständigkeit.
+</p>
+</div>
+</aside>
+</main>
+</div>
 
-  <script>
-    const posts = [
-      {
-        id: "hello-world",
-        title: "Hello World: Mein erster Post",
-        date: "2025-12-13",
-        author: "Angry Owl",
-        tags: ["Start", "Web"],
-        excerpt: "Ein kurzer Startpost als Beispiel. Du kannst Posts unten im Array bearbeiten.",
-        content:
-`Willkommen auf deinem Blog!
+<footer>
+© <span id="year"></span> Mein Blog
+</footer>
 
-Das ist ein Demo-Post. Du kannst:
-- Titel/Datum/Tags ändern
-- Mehr Posts hinzufügen
-- Später ein Backend anschließen, um Posts aus einer Datenbank zu laden.`
-      },
-      {
-        id: "simple-html",
-        title: "Warum Plain HTML manchmal reicht",
-        date: "2025-12-10",
-        author: "Angry Owl",
-        tags: ["HTML", "Basics"],
-        excerpt: "Für kleine Projekte ist eine einzelne Datei oft schneller als ein ganzes Framework-Setup.",
-        content:
-`Plain HTML/CSS/JS hat Vorteile:
-- Keine Build-Tools nötig
-- Sehr schnell deploybar (z.B. GitHub Pages)
-- Gut für Prototypen und Schulprojekte`
-      },
-      {
-        id: "next-steps",
-        title: "Nächste Schritte: Backend oder Static Site Generator",
-        date: "2025-12-08",
-        author: "Angry Owl",
-        tags: ["Backend", "Ideen"],
-        excerpt: "Wenn du Kommentare, Accounts oder Admin-Panel willst, brauchst du mehr als nur HTML.",
-        content:
-`Optionen:
-1) Static Site Generator (Hugo/Jekyll/Astro) – super für Content, schnell, sicher.
-2) Backend (Node/PHP/Python) – nötig für Login, Kommentare, Admin-UI, DB.
+<dialog id="postModal">
+  <h3 id="modalTitle"></h3>
+  <p class="meta" id="modalMeta"></p>
+  <pre id="modalContent"></pre>
+  <button class="close-btn" onclick="modal.close()">Schließen</button>
+</dialog>
 
-Wenn du willst, kann ich dir ein kleines Node/Express-Backend dazu schreiben.`
-      }
-    ];
+<script>
+const posts = [
+  {
+    id: "bow-clan-update",
+    title: "Community-Update: Diskussionen rund um den Bow-Clan",
+    date: "2025-12-13",
+    author: "Redaktion",
+    tags: ["Community", "Minecraft"],
+    excerpt: "In der Community rund um GommeHDNet wird aktuell viel diskutiert. Hier ein sachlicher Überblick.",
+    content:
+`In den letzten Tagen gab es vermehrt Diskussionen innerhalb der Community rund um den Bow-Clan auf GommeHDNet.
+Dabei geht es weniger um konkrete Vorfälle, sondern um unterschiedliche Auffassungen zu Organisation, Kommunikation und Außenwirkung.
 
-    const elPostList = document.getElementById("postList");
-    const elSearch = document.getElementById("search");
-    const elTagFilter = document.getElementById("tagFilter");
-    const elSort = document.getElementById("sort");
-    const elTagPills = document.getElementById("tagPills");
+Mehrere Beteiligte haben öffentlich betont, dass viele Informationen aus dem Kontext gerissen wurden.
+Gleichzeitig zeigt die Debatte, wie sensibel Community-Strukturen auf Gerüchte und Spekulationen reagieren.
 
-    const modal = document.getElementById("postModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalMeta = document.getElementById("modalMeta");
-    const modalContent = document.getElementById("modalContent");
-    const closeModalBtn = document.getElementById("closeModal");
+Aktuell gibt es keine bestätigten Aussagen über Konsequenzen oder strukturelle Änderungen.
+Beobachter gehen davon aus, dass sich die Situation in den kommenden Wochen durch Klärungsgespräche beruhigen wird.
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+Dieser Artikel fasst ausschließlich öffentlich wahrnehmbare Reaktionen zusammen und erhebt keinen Anspruch auf Vollständigkeit.`
+  },
+  {
+    id: "hello-world",
+    title: "Hello World: Mein erster Post",
+    date: "2025-12-10",
+    author: "Angry Owl",
+    tags: ["Start"],
+    excerpt: "Ein einfacher Startartikel für den Blog.",
+    content: "Willkommen auf diesem Blog. Weitere Artikel folgen."
+  }
+];
 
-    function uniqueTags(list) {
-      const set = new Set();
-      list.forEach(p => (p.tags || []).forEach(t => set.add(t)));
-      return Array.from(set).sort((a,b)=>a.localeCompare(b));
-    }
+const list = document.getElementById("postList");
+const modal = document.getElementById("postModal");
 
-    function renderTagUI(tags) {
-      // Dropdown
-      elTagFilter.innerHTML = `<option value="all">Alle Tags</option>` +
-        tags.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join("");
+function render(){
+  list.innerHTML = posts.map(p => `
+    <article class="post">
+      <h2>${p.title}</h2>
+      <div class="meta">${p.date} • ${p.author}</div>
+      <p>${p.excerpt}</p>
+      <a href="#" onclick="openPost('${p.id}')">Artikel öffnen</a>
+    </article>
+  `).join("");
+}
 
-      // Pills
-      elTagPills.innerHTML = "";
-      const allBtn = makeTagPill("Alle", "all");
-      elTagPills.appendChild(allBtn);
+function openPost(id){
+  const p = posts.find(x => x.id === id);
+  document.getElementById("modalTitle").textContent = p.title;
+  document.getElementById("modalMeta").textContent = p.date + " • " + p.author;
+  document.getElementById("modalContent").textContent = p.content;
+  modal.showModal();
+}
 
-      tags.forEach(t => elTagPills.appendChild(makeTagPill(t, t)));
-    }
-
-    function makeTagPill(label, value) {
-      const a = document.createElement("a");
-      a.href = "#posts";
-      a.className = "tag";
-      a.textContent = label;
-      a.style.textDecoration = "none";
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        elTagFilter.value = value;
-        render();
-      });
-      return a;
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    function matches(post, q, tag) {
-      const query = q.trim().toLowerCase();
-      const text = [
-        post.title, post.excerpt, post.content, (post.tags||[]).join(" ")
-      ].join(" ").toLowerCase();
-
-      const queryOk = !query || text.includes(query);
-      const tagOk = (tag === "all") || (post.tags || []).includes(tag);
-      return queryOk && tagOk;
-    }
-
-    function sortPosts(list, mode) {
-      const copy = [...list];
-      if (mode === "new") {
-        copy.sort((a,b)=> new Date(b.date) - new Date(a.date));
-      } else if (mode === "old") {
-        copy.sort((a,b)=> new Date(a.date) - new Date(b.date));
-      } else if (mode === "az") {
-        copy.sort((a,b)=> a.title.localeCompare(b.title));
-      }
-      return copy;
-    }
-
-    function render() {
-      const q = elSearch.value;
-      const tag = elTagFilter.value;
-      const mode = elSort.value;
-
-      const filtered = posts.filter(p => matches(p, q, tag));
-      const sorted = sortPosts(filtered, mode);
-
-      if (sorted.length === 0) {
-        elPostList.innerHTML = `<p style="color:var(--muted); margin:0;">Keine Posts gefunden.</p>`;
-        return;
-      }
-
-      elPostList.innerHTML = sorted.map(p => {
-        const tags = (p.tags||[]).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join(" ");
-        return `
-          <article class="post">
-            <h2>${escapeHtml(p.title)}</h2>
-            <div class="meta">
-              <span>${escapeHtml(p.date)}</span>
-              <span>•</span>
-              <span>${escapeHtml(p.author || "Unbekannt")}</span>
-              <span>•</span>
-              <span>${tags}</span>
-            </div>
-            <p class="excerpt">${escapeHtml(p.excerpt || "")}</p>
-            <a class="readmore" href="#post/${encodeURIComponent(p.id)}" data-open="${escapeHtml(p.id)}">Artikel öffnen</a>
-          </article>
-        `;
-      }).join("");
-
-      // Link-Handler
-      elPostList.querySelectorAll("[data-open]").forEach(a => {
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          openPost(a.getAttribute("data-open"));
-        });
-      });
-    }
-
-    function openPost(id) {
-      const p = posts.find(x => x.id === id);
-      if (!p) return;
-
-      modalTitle.textContent = p.title;
-      modalMeta.textContent = `${p.date} • ${p.author || "Unbekannt"} • ${(p.tags||[]).join(", ")}`;
-      modalContent.textContent = p.content || "";
-      modal.showModal();
-
-      history.replaceState(null, "", `#post/${encodeURIComponent(id)}`);
-    }
-
-    function closePost() {
-      if (modal.open) modal.close();
-      history.replaceState(null, "", "#posts");
-    }
-
-    // Events
-    elSearch.addEventListener("input", render);
-    elTagFilter.addEventListener("change", render);
-    elSort.addEventListener("change", render);
-    closeModalBtn.addEventListener("click", closePost);
-
-    modal.addEventListener("click", (e) => {
-      // click outside content closes
-      const rect = modal.getBoundingClientRect();
-      const inDialog = (
-        rect.top <= e.clientY && e.clientY <= rect.bottom &&
-        rect.left <= e.clientX && e.clientX <= rect.right
-      );
-      if (!inDialog) closePost();
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closePost();
-    });
-
-    // Init
-    const tags = uniqueTags(posts);
-    renderTagUI(tags);
-    render();
-
-    // Open post via URL hash
-    if (location.hash.startsWith("#post/")) {
-      const id = decodeURIComponent(location.hash.split("/")[1] || "");
-      openPost(id);
-    }
-  </script>
+document.getElementById("year").textContent = new Date().getFullYear();
+render();
+</script>
 </body>
 </html>
