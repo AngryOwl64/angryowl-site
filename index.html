@@ -1,168 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mein Blog</title>
-  <meta name="description" content="Ein einfacher Blog in reinem HTML/CSS/JS." />
+  <meta charset="UTF-8">
+  <title>Snake</title>
   <style>
-    :root{
-      --bg:#0b0f14; --card:#111826; --text:#e7edf7; --muted:#a8b3c7;
-      --border:#223047; --accent:#5aa7ff; --accent2:#7c5cff;
-      --max: 1050px;
+    body {
+      background: #0e0e0e;
+      color: #eaeaea;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text); background:#0b0f14;
+
+    canvas {
+      background: #000;
+      border: 2px solid #333;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:20px}
-    header{
-      position:sticky; top:0;
-      background:#0b0f14;
-      border-bottom:1px solid var(--border);
+
+    .hud {
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
     }
-    .topbar{display:flex; align-items:center; gap:14px; padding:14px 20px; max-width:var(--max); margin:0 auto;}
-    nav{margin-left:auto; display:flex; gap:10px}
-    nav a{text-decoration:none; color:var(--muted)}
-    nav a:hover{color:var(--text)}
-    main{padding:22px 0 40px}
-    .grid{display:grid; gap:18px}
-    @media (min-width:900px){.grid{grid-template-columns:2fr 1fr}}
-    .card{
-      background:#111826; border:1px solid var(--border);
-      border-radius:16px; padding:16px;
+
+    .overlay {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
     }
-    .post{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      margin-bottom:14px;
+
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+      cursor: pointer;
     }
-    .post h2{margin:0 0 6px}
-    .meta{font-size:13px; color:var(--muted)}
-    footer{
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      padding:18px 20px;
-      max-width:var(--max);
-      margin:0 auto;
+
+    button:hover {
+      background: #333;
     }
-    dialog{
-      width:min(860px, 92vw);
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:#111826;
-      color:var(--text);
-    }
-    .close-btn{
-      border:1px solid var(--border);
-      background:#0b0f14;
-      color:var(--text);
-      border-radius:10px;
-      padding:6px 10px;
-      cursor:pointer;
+
+    .hint {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #aaa;
     }
   </style>
 </head>
-
 <body>
-<header>
-  <div class="topbar">
-    <strong>Mein Blog</strong>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-    </nav>
+
+  <div class="hud">
+    <div>Score: <span id="score">0</span></div>
+    <div>Highscore: <span id="highscore">0</span></div>
   </div>
-</header>
 
-<div class="wrap">
-<main class="grid" id="home">
-<section>
-<div class="card" id="posts">
-<div id="postList"></div>
-</div>
-</section>
+  <div style="position: relative;">
+    <canvas id="game" width="400" height="400"></canvas>
+    <div class="overlay" id="overlay">
+      <h2 id="overlayTitle">Game Over</h2>
+      <p id="overlayText"></p>
+      <button onclick="startGame()">Restart</button>
+      <div class="hint">Leertaste = Pause</div>
+    </div>
+  </div>
 
-<aside>
-<div class="card">
-<p style="color:var(--muted); margin:0">
-Dieser Blog enthält Beispielartikel und sachliche Community-Updates ohne Anspruch auf Vollständigkeit.
-</p>
-</div>
-</aside>
-</main>
-</div>
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
 
-<footer>
-© <span id="year"></span> Mein Blog
-</footer>
+    const gridSize = 20;
+    const tiles = canvas.width / gridSize;
 
-<dialog id="postModal">
-  <h3 id="modalTitle"></h3>
-  <p class="meta" id="modalMeta"></p>
-  <pre id="modalContent"></pre>
-  <button class="close-btn" onclick="modal.close()">Schließen</button>
-</dialog>
+    let snake, dx, dy, food;
+    let score = 0;
+    let speed = 140;
+    let gameInterval = null;
+    let paused = false;
+    let gameOver = false;
 
-<script>
-const posts = [
-  {
-    id: "bow-clan-update",
-    title: "Community-Update: Diskussionen rund um den Bow-Clan",
-    date: "2025-12-13",
-    author: "Redaktion",
-    tags: ["Community", "Minecraft"],
-    excerpt: "In der Community rund um GommeHDNet wird aktuell viel diskutiert. Hier ein sachlicher Überblick.",
-    content:
-`In den letzten Tagen gab es vermehrt Diskussionen innerhalb der Community rund um den Bow-Clan auf GommeHDNet.
-Dabei geht es weniger um konkrete Vorfälle, sondern um unterschiedliche Auffassungen zu Organisation, Kommunikation und Außenwirkung.
+    const scoreEl = document.getElementById("score");
+    const highscoreEl = document.getElementById("highscore");
+    const overlay = document.getElementById("overlay");
+    const overlayText = document.getElementById("overlayText");
 
-Mehrere Beteiligte haben öffentlich betont, dass viele Informationen aus dem Kontext gerissen wurden.
-Gleichzeitig zeigt die Debatte, wie sensibel Community-Strukturen auf Gerüchte und Spekulationen reagieren.
+    let highscore = localStorage.getItem("snake_highscore") || 0;
+    highscoreEl.textContent = highscore;
 
-Aktuell gibt es keine bestätigten Aussagen über Konsequenzen oder strukturelle Änderungen.
-Beobachter gehen davon aus, dass sich die Situation in den kommenden Wochen durch Klärungsgespräche beruhigen wird.
+    function startGame() {
+      snake = [{ x: 10, y: 10 }];
+      dx = 1;
+      dy = 0;
+      score = 0;
+      speed = 140;
+      paused = false;
+      gameOver = false;
+      food = spawnFood();
 
-Dieser Artikel fasst ausschließlich öffentlich wahrnehmbare Reaktionen zusammen und erhebt keinen Anspruch auf Vollständigkeit.`
-  },
-  {
-    id: "hello-world",
-    title: "Hello World: Mein erster Post",
-    date: "2025-12-10",
-    author: "Angry Owl",
-    tags: ["Start"],
-    excerpt: "Ein einfacher Startartikel für den Blog.",
-    content: "Willkommen auf diesem Blog. Weitere Artikel folgen."
-  }
-];
+      scoreEl.textContent = score;
+      overlay.style.display = "none";
 
-const list = document.getElementById("postList");
-const modal = document.getElementById("postModal");
+      clearInterval(gameInterval);
+      gameInterval = setInterval(loop, speed);
+    }
 
-function render(){
-  list.innerHTML = posts.map(p => `
-    <article class="post">
-      <h2>${p.title}</h2>
-      <div class="meta">${p.date} • ${p.author}</div>
-      <p>${p.excerpt}</p>
-      <a href="#" onclick="openPost('${p.id}')">Artikel öffnen</a>
-    </article>
-  `).join("");
-}
+    function spawnFood() {
+      let pos;
+      do {
+        pos = {
+          x: Math.floor(Math.random() * tiles),
+          y: Math.floor(Math.random() * tiles)
+        };
+      } while (snake.some(p => p.x === pos.x && p.y === pos.y));
+      return pos;
+    }
 
-function openPost(id){
-  const p = posts.find(x => x.id === id);
-  document.getElementById("modalTitle").textContent = p.title;
-  document.getElementById("modalMeta").textContent = p.date + " • " + p.author;
-  document.getElementById("modalContent").textContent = p.content;
-  modal.showModal();
-}
+    function loop() {
+      if (paused || gameOver) return;
+      update();
+      draw();
+    }
 
-document.getElementById("year").textContent = new Date().getFullYear();
-render();
-</script>
+    function update() {
+      const head = {
+        x: snake[0].x + dx,
+        y: snake[0].y + dy
+      };
+
+      if (
+        head.x < 0 || head.y < 0 ||
+        head.x >= tiles || head.y >= tiles ||
+        snake.some(p => p.x === head.x && p.y === head.y)
+      ) {
+        endGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === food.x && head.y === food.y) {
+        score++;
+        scoreEl.textContent = score;
+        food = spawnFood();
+
+        if (score % 5 === 0 && speed > 60) {
+          speed -= 10;
+          clearInterval(gameInterval);
+          gameInterval = setInterval(loop, speed);
+        }
+      } else {
+        snake.pop();
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "lime";
+      for (const p of snake) {
+        ctx.fillRect(
+          p.x * gridSize,
+          p.y * gridSize,
+          gridSize - 1,
+          gridSize - 1
+        );
+      }
+
+      ctx.fillStyle = "red";
+      ctx.fillRect(
+        food.x * gridSize,
+        food.y * gridSize,
+        gridSize - 1,
+        gridSize - 1
+      );
+    }
+
+    function endGame() {
+      gameOver = true;
+      overlay.style.display = "flex";
+      overlayText.textContent = `Score: ${score}`;
+
+      if (score > highscore) {
+        highscore = score;
+        localStorage.setItem("snake_highscore", highscore);
+        highscoreEl.textContent = highscore;
+        overlayText.textContent += " (Neuer Highscore)";
+      }
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === " ") {
+        paused = !paused;
+        return;
+      }
+
+      if (paused) return;
+
+      if (e.key === "ArrowUp" && dy === 0) { dx = 0; dy = -1; }
+      if (e.key === "ArrowDown" && dy === 0) { dx = 0; dy = 1; }
+      if (e.key === "ArrowLeft" && dx === 0) { dx = -1; dy = 0; }
+      if (e.key === "ArrowRight" && dx === 0) { dx = 1; dy = 0; }
+    });
+
+    startGame();
+  </script>
+
 </body>
 </html>
