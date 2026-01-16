@@ -1,308 +1,593 @@
-<!DOCTYPE html>
+<!-- index.html | BowClan [bow] – inoffizielle Fansite (GommeHD.net) -->
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<title>Snake</title>
-<style>
-  :root{
-    --bg:#0b0e14; --panel:#111827; --muted:#9ca3af;
-    --accent:#22c55e; --danger:#ef4444; --grid:#0f172a; --power:#60a5fa;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
-    background: radial-gradient(1200px 600px at 50% -10%, #1f2937 0%, transparent 60%),
-                linear-gradient(180deg, #020617, var(--bg));
-    color:#e5e7eb;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
-  }
-  .wrap{
-    width:min(92vw,480px);
-    display:grid; gap:12px; padding:18px;
-    background:linear-gradient(180deg,#0b1220,#070b14);
-    border-radius:18px;
-    box-shadow:0 30px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05);
-  }
-  .hud{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:10px 12px; border-radius:12px;
-    background:rgba(17,24,39,.7); backdrop-filter: blur(6px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
-    font-weight:600;
-  }
-  .hud span{color:var(--muted); font-weight:500}
-  .badge{
-    font-size:12px; color:#cbd5e1;
-    padding:4px 8px; border-radius:999px;
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(2,6,23,.45);
-  }
-  .stage{
-    position:relative; border-radius:16px; overflow:hidden;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
-  }
-  canvas{
-    display:block; width:100%; height:auto;
-    background:
-      linear-gradient(0deg, transparent 19px, var(--grid) 20px),
-      linear-gradient(90deg, transparent 19px, var(--grid) 20px),
-      #020617;
-    background-size:20px 20px;
-  }
-  .overlay{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    background:radial-gradient(500px 300px at 50% 40%, rgba(2,6,23,.55), rgba(2,6,23,.9));
-    backdrop-filter: blur(2px);
-  }
-  .card{
-    width:min(90%,360px);
-    padding:18px; border-radius:16px;
-    background:rgba(17,24,39,.86);
-    box-shadow:0 20px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06);
-    text-align:center;
-  }
-  .row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px}
-  select,label{font:inherit}
-  select,.toggle{
-    background:#0b1220; color:#e5e7eb;
-    border:1px solid rgba(255,255,255,.12);
-    padding:8px 10px; border-radius:10px;
-  }
-  .toggle{display:flex; align-items:center; gap:8px}
-  .btn{
-    width:100%; margin-top:12px; padding:10px 14px; border-radius:12px;
-    border:0; cursor:pointer; font-weight:800;
-    background:linear-gradient(180deg,#34d399,#22c55e);
-    color:#022c22; box-shadow:0 10px 30px rgba(34,197,94,.35);
-  }
-  .hint{margin-top:8px; font-size:12px; color:var(--muted)}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BowClan [bow] – Fansite</title>
+  <meta name="description" content="Inoffizielle Fansite zum BowClan [bow] auf GommeHD.net: Infos, Join, Events, Links & Quellen." />
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --card:#111525;
+      --muted:#aab2c5;
+      --text:#eef1f7;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 12px 35px rgba(0,0,0,.35);
+      --radius:18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --muted:#55607a;
+      --text:#0e1320;
+      --line:rgba(14,19,32,.12);
+      --shadow: 0 12px 35px rgba(14,19,32,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(900px 500px at 12% -10%, rgba(125,211,252,.18), transparent 60%),
+        radial-gradient(900px 500px at 88% -10%, rgba(167,139,250,.16), transparent 55%),
+        radial-gradient(1200px 600px at 50% 110%, rgba(125,211,252,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 24px;max-width:1100px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 10px 25px rgba(125,211,252,.18);
+    }
+    .brand strong{letter-spacing:.2px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 90%, transparent);
+      text-decoration:none;
+    }
+    .pill:hover{border-color: color-mix(in srgb, var(--accent) 60%, var(--line))}
+    .nav-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .btn{
+      appearance:none;border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      color:var(--text);
+      padding:10px 12px;border-radius:12px;
+      cursor:pointer;
+    }
+    .btn:hover{border-color: color-mix(in srgb, var(--accent) 60%, var(--line))}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, #000 15%), color-mix(in srgb, var(--accent2) 75%, #000 25%));
+      color:#07101a;
+      font-weight:700;
+    }
+    .btn.primary:hover{filter:brightness(1.05)}
+    .hero{
+      padding:36px 0 10px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .nav-inner{flex-wrap:wrap}
+      .nav-links{justify-content:flex-start}
+    }
+    .card{
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero .card{padding:22px}
+    h1{font-size:42px;line-height:1.05;margin:0 0 10px;letter-spacing:-.6px}
+    .subtitle{color:var(--muted);max-width:70ch;margin:0 0 18px}
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+      margin-top:16px;
+    }
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    .col-8{grid-column: span 8}
+    .col-12{grid-column: span 12}
+    @media (max-width: 900px){
+      .col-6,.col-4,.col-8{grid-column: span 12}
+    }
+    .section{padding:18px}
+    .section h2{margin:0 0 10px;font-size:20px}
+    .meta{
+      display:grid; gap:10px; margin-top:12px;
+    }
+    .kv{
+      display:flex;justify-content:space-between;gap:12px;
+      padding:10px 12px;border-radius:14px;
+      border:1px dashed var(--line);
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .kv span{color:var(--muted);font-family:var(--sans);font-size:13px}
+    .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+    }
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{
+      padding:12px 12px;border-radius:14px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+    }
+    .item h3{margin:0 0 6px;font-size:15px}
+    .item p{margin:0;color:var(--muted)}
+    .item a{color:var(--text);text-decoration:none;border-bottom:1px solid color-mix(in srgb, var(--text) 25%, transparent)}
+    .item a:hover{border-bottom-color:var(--accent)}
+    .split{
+      display:grid; gap:12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 900px){.split{grid-template-columns:1fr}}
+    .faq details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px;
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+    }
+    .faq details summary{cursor:pointer;font-weight:650}
+    .faq details p{margin:8px 0 0;color:var(--muted)}
+    footer{padding:30px 0 14px;color:var(--muted);font-size:13px}
+    .small{font-size:12px;color:var(--muted)}
+    .toast{
+      position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border:1px solid var(--line);
+      padding:10px 14px;border-radius:999px;
+      box-shadow: var(--shadow);
+      opacity:0; pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      display:flex;align-items:center;gap:10px;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-2px)}
+    .kbd{
+      font-family:var(--mono);
+      padding:2px 8px;border-radius:10px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      font-size:12px;
+    }
+  </style>
 </head>
-<body>
 
-<div class="wrap">
-  <div class="hud">
-    <div>Score: <span id="score">0</span></div>
-    <div style="display:flex;gap:10px;align-items:center;">
-      <span class="badge" id="state">MENÜ</span>
-      <div>High: <span id="high">0</span></div>
-    </div>
-  </div>
-
-  <div class="stage">
-    <canvas id="game" width="400" height="400"></canvas>
-
-    <!-- Start / Game Over -->
-    <div class="overlay" id="overlay">
-      <div class="card">
-        <h2 id="title">Snake</h2>
-        <p id="text">Wähle Optionen und starte.</p>
-
-        <div class="row">
-          <div>
-            <div style="text-align:left;font-size:12px;color:var(--muted);margin:0 0 6px 2px;">Schwierigkeit</div>
-            <select id="difficulty">
-              <option value="easy">Easy</option>
-              <option value="normal" selected>Normal</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-
-          <label class="toggle">
-            <input id="obstaclesOn" type="checkbox" checked>
-            Obstacles
-          </label>
-
-          <label class="toggle">
-            <input id="powersOn" type="checkbox" checked>
-            Power-Ups
-          </label>
+<body data-theme="dark">
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>BowClan</strong>
+          <div class="small">[bow] auf GommeHD.net</div>
         </div>
+      </a>
 
-        <button class="btn" id="startBtn">Start</button>
-        <div class="hint">Pfeile = Bewegung · Leertaste = Pause</div>
-      </div>
+      <nav class="nav-links" aria-label="Navigation">
+        <a class="pill" href="#about">Überblick</a>
+        <a class="pill" href="#join">Join</a>
+        <a class="pill" href="#events">Events</a>
+        <a class="pill" href="#forum">Forum</a>
+        <a class="pill" href="#faq">FAQ</a>
+        <button id="themeBtn" class="btn" type="button" title="Theme umschalten">
+          Theme
+        </button>
+      </nav>
     </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="card">
+        <h1>BowClan <span style="color:var(--accent)">[bow]</span></h1>
+        <p class="subtitle">
+          Inoffizielle Fansite (kein offizieller Auftritt des Clans).
+          Inhalte basieren auf öffentlich sichtbaren Angaben der Clanpage und ausgewählten Forum-Threads.
+        </p>
+        <div class="tagrow" id="badges"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <a class="btn primary" id="ctaClanpage" target="_blank" rel="noreferrer">Zur Clanpage</a>
+          <a class="btn" id="ctaDiscord" target="_blank" rel="noreferrer">Discord</a>
+          <button class="btn" id="copyContacts" type="button">Kontakt-Namen kopieren</button>
+        </div>
+        <div class="meta" id="quickMeta" style="margin-top:16px"></div>
+        <div class="small" style="margin-top:12px">
+          Tipp: <span class="kbd">Strg</span> + <span class="kbd">K</span> fokussiert die Suche (siehe Forum-Sektion).
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section">
+          <h2>Kurzzusammenfassung</h2>
+          <div class="list" id="summaryList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card col-8" id="about">
+        <div class="section">
+          <h2>Überblick</h2>
+          <div class="split">
+            <div class="item">
+              <h3>Was man öffentlich über [bow] findet</h3>
+              <p id="aboutText"></p>
+            </div>
+            <div class="item">
+              <h3>Wichtige Links</h3>
+              <p>
+                <a id="linkClanpage" target="_blank" rel="noreferrer">Clanpage (GommeHD.net)</a><br/>
+                <a id="linkHomepage" target="_blank" rel="noreferrer">Homepage (bowclan.de)</a><br/>
+                <a id="linkForumClans" target="_blank" rel="noreferrer">Forum: Clans</a>
+              </p>
+              <p class="small" style="margin-top:10px">
+                Hinweis: bowclan.de war beim Abruf teils nicht erreichbar (Serverfehler). Deshalb hier nur als Link.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card col-4" id="join">
+        <div class="section">
+          <h2>Join / Bewerbung</h2>
+          <div class="list">
+            <div class="item">
+              <h3>Standardweg (laut Clanpage)</h3>
+              <p>
+                Bewerbung/Anfrage über Discord an <span class="kbd" id="contactA"></span> oder
+                <span class="kbd" id="contactB"></span>.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Praktisch</h3>
+              <p>
+                <button class="btn" id="openDiscord" type="button">Discord öffnen</button>
+                <button class="btn" id="copyDiscord" type="button">Discord-Invite kopieren</button>
+              </p>
+            </div>
+            <div class="item">
+              <h3>Eigene Daten ergänzen</h3>
+              <p class="small">
+                Wenn du willst, kannst du unten im JS-Block die Felder für Anforderungen/Stats/Formular ergänzen
+                (z. B. Mindest-ELO, Aktivität, etc.). Ich habe dazu nichts Belastbares gefunden, daher absichtlich leer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card col-6" id="events">
+        <div class="section">
+          <h2>Events / Projekte (Forum)</h2>
+          <div class="list" id="eventsList"></div>
+        </div>
+      </div>
+
+      <div class="card col-6" id="forum">
+        <div class="section">
+          <h2>Forum-Snippets & Links</h2>
+          <div class="item" style="margin-bottom:10px">
+            <h3>Suche</h3>
+            <p style="margin:0 0 10px;color:var(--muted)">
+              Lokale Suche über die hier hinterlegten Forum-Links (kein Live-Scraping).
+            </p>
+            <input id="search" type="search" placeholder="z. B. bingo, cwbw, bow..."
+              style="width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+              background:color-mix(in srgb, var(--card) 88%, transparent);color:var(--text);outline:none" />
+          </div>
+          <div class="list" id="forumLinks"></div>
+          <p class="small" style="margin-top:12px">
+            Warum nicht automatisch die neuesten Posts laden? Das Forum liefert Inhalte teils dynamisch und/oder mit Login;
+            außerdem ist automatisches Scraping rechtlich/technisch riskant. Hier deshalb kuratierte Links + kurze, eigene Zusammenfassungen.
+          </p>
+        </div>
+      </div>
+
+      <div class="card col-12" id="faq">
+        <div class="section">
+          <h2>FAQ</h2>
+          <div class="faq" id="faqList" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+
+      <div class="card col-12">
+        <div class="section">
+          <h2>Quellen</h2>
+          <div class="list" id="sources"></div>
+          <p class="small" style="margin-top:12px">
+            Copyright-Hinweis: Es wurden keine längeren Textpassagen kopiert; nur Links und kurze, eigene Zusammenfassungen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        Inoffizielle Fansite. GommeHD.net / Clanpage-Inhalte gehören den jeweiligen Rechteinhabern.
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastMsg">Kopiert.</span>
   </div>
-</div>
 
-<script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-const grid = 20;
-const tiles = canvas.width / grid;
+  <script>
+    // Datenbasis: öffentlich sichtbare Angaben (Clanpage + ausgewählte Forenthreads).
+    // Stand: Quellen-Links unten. Inhalte absichtlich knapp & paraphrasiert.
+    const DATA = {
+      clan: {
+        name: "BowClan",
+        tag: "bow",
+        gommeClanpage: "https://www.gommehd.net/clan/bow",
+        homepage: "https://bowclan.de",
+        forumClans: "https://www.gommehd.net/forum/forums/clans/",
+        founded: "18.09.2022",
+        membersShown: 104, // "Members (104)" auf der Clanpage (sichtbarer UI-Wert).
+        pointsShown: 204,  // Zahl neben Clanpage-Header (sichtbarer UI-Wert).
+        pitch: [
+          "Großer Clan mit aktivem Discord und offener, netter Community (Selbstbeschreibung).",
+          "Auf der Clanpage wird außerdem behauptet, man sei als 'Top 10'-Clan bewerbbar (Selbstbeschreibung)."
+        ],
+        contactsDiscord: ["b0gen", "NurEinSchlumpfi"],
+        discordInvite: null // wird aus Clanpage-Text nur als discord.gg Link angezeigt; hier absichtlich nicht hardcodiert
+      },
+      forumHighlights: [
+        {
+          title: "Bingo-Turnier by [bow] (Duo, mit Preisgeld)",
+          date: "11.10.2023",
+          type: "Event",
+          url: "https://www.gommehd.net/forum/threads/bingo-turnier-mit-preisgeld.948403/",
+          summary: "Ankündigung eines Duo-Bingo-Turniers (geplant für 14./15.10.2023) inkl. Anmeldung über Discord."
+        },
+        {
+          title: "Spielmodus-Vorschlag: CWBW 2.0 (Diskussion)",
+          date: "17.02.2024",
+          type: "Diskussion",
+          url: "https://www.gommehd.net/forum/threads/cwbw-2-0.948835/",
+          summary: "Vorschlag/Diskussion zu ClanWars-ähnlichem BedWars-Format im neuen BedWars; zahlreiche Pro/Contra-Posts."
+        },
+        {
+          title: "Antwort in 'Suche clan' verweist auf [bow]",
+          date: "26.01.2025",
+          type: "Verweis",
+          url: "https://www.gommehd.net/forum/threads/suche-clan.950015/",
+          summary: "Kurzantwort mit Link zur Clanpage + Hinweis, b0gen/NurEinSchlumpfi via Discord zu kontaktieren."
+        }
+      ],
+      faq: [
+        {
+          q: "Ist diese Seite offiziell?",
+          a: "Nein. Das ist eine Fansite/Template. Offizielle Infos findest du auf der Clanpage und (falls erreichbar) bowclan.de."
+        },
+        {
+          q: "Wie bewerbe ich mich?",
+          a: "Laut Clanpage: über Discord an b0gen oder NurEinSchlumpfi schreiben."
+        },
+        {
+          q: "Warum sind hier keine harten Anforderungen (ELO/KD/etc.)?",
+          a: "Dazu habe ich in den öffentlich sichtbaren Quellen nichts Verlässliches gefunden. Du kannst das Template aber leicht ergänzen."
+        },
+        {
+          q: "Warum werden keine Forum-Posts automatisch geladen?",
+          a: "Technisch/rechtlich problematisch (Login/Dynamik/Scraping). Stattdessen: kuratierte Links + kurze Zusammenfassung."
+        }
+      ],
+      sources: [
+        { label: "GommeHD Clanpage: bow [bow] (Profil/Links/Gründungsdatum/Member-Anzeige)", url: "https://www.gommehd.net/clan/bow" },
+        { label: "Forum: Bingo-Turnier mit Preisgeld (by [bow])", url: "https://www.gommehd.net/forum/threads/bingo-turnier-mit-preisgeld.948403/" },
+        { label: "Forum: Spielmodus – CWBW 2.0 (Diskussion)", url: "https://www.gommehd.net/forum/threads/cwbw-2-0.948835/" },
+        { label: "Forum: 'Suche clan' (Verweis auf [bow])", url: "https://www.gommehd.net/forum/threads/suche-clan.950015/" },
+        { label: "Forum-Übersicht: Clans", url: "https://www.gommehd.net/forum/forums/clans/" }
+      ]
+    };
 
-const scoreEl = document.getElementById("score");
-const highEl = document.getElementById("high");
-const overlay = document.getElementById("overlay");
-const titleEl = document.getElementById("title");
-const textEl = document.getElementById("text");
-const stateEl = document.getElementById("state");
+    // ---------- Rendering ----------
+    const el = (id) => document.getElementById(id);
 
-const diffEl = document.getElementById("difficulty");
-const obstaclesOnEl = document.getElementById("obstaclesOn");
-const powersOnEl = document.getElementById("powersOn");
-document.getElementById("startBtn").onclick = start;
+    function render() {
+      // CTAs
+      el("ctaClanpage").href = DATA.clan.gommeClanpage;
+      el("ctaDiscord").href = DATA.clan.gommeClanpage; // sichere Default: Clanpage hat Invite-Link sichtbar
+      el("linkClanpage").href = DATA.clan.gommeClanpage;
+      el("linkHomepage").href = DATA.clan.homepage;
+      el("linkForumClans").href = DATA.clan.forumClans;
 
-let snake, dx, dy, food, obstacles=[], power=null;
-let score=0, speed=120, paused=false, over=false, timer=null;
-let slowUntil = 0;
+      // Contacts
+      el("contactA").textContent = DATA.clan.contactsDiscord[0];
+      el("contactB").textContent = DATA.clan.contactsDiscord[1];
 
-let high = +localStorage.getItem("snake_high") || 0;
-highEl.textContent = high;
+      // Badges
+      const badges = [
+        `Tag: [${DATA.clan.tag}]`,
+        `Gegründet: ${DATA.clan.founded}`,
+        `Members (Anzeige): ${DATA.clan.membersShown}`,
+        `Wert (Anzeige): ${DATA.clan.pointsShown}`
+      ];
+      el("badges").innerHTML = badges.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("");
 
-function speedFromDiff(v){ return v==="easy"?160 : v==="hard"?95 : 120; }
+      // Quick meta
+      const meta = [
+        { k: "Clanpage", v: shortUrl(DATA.clan.gommeClanpage) },
+        { k: "Kontakt", v: DATA.clan.contactsDiscord.join(" / ") },
+        { k: "Forum", v: "Events & Diskussionen (Links)" }
+      ];
+      el("quickMeta").innerHTML = meta.map(x => `
+        <div class="kv"><span>${escapeHtml(x.k)}</span><div>${escapeHtml(x.v)}</div></div>
+      `).join("");
 
-function showMenu(kind="menu", msg="Wähle Optionen und starte."){
-  overlay.style.display="flex";
-  stateEl.textContent = kind==="over" ? "GAME OVER" : "MENÜ";
-  titleEl.textContent = kind==="over" ? "Game Over" : "Snake";
-  textEl.textContent = msg;
-}
-function hideMenu(){
-  overlay.style.display="none";
-  stateEl.textContent = paused ? "PAUSE" : "PLAY";
-}
+      // About text
+      el("aboutText").textContent =
+        `${DATA.clan.pitch.join(" ")} ` +
+        `Öffentlich sichtbar ist außerdem ein Discord-Invite-Link sowie ein Homepage-Link.`;
 
-function randPos(avoid=[]){
-  let p;
-  do{
-    p={x:Math.floor(Math.random()*tiles),y:Math.floor(Math.random()*tiles)};
-  }while(avoid.some(a=>a.x===p.x&&a.y===p.y));
-  return p;
-}
+      // Summary list
+      const summary = [
+        { t: "Selbstbeschreibung", p: "Aktiver Discord, offene Community (laut Clanpage)." },
+        { t: "Kontakt", p: "Discord: b0gen oder NurEinSchlumpfi (laut Clanpage)." },
+        { t: "Forum-Events", p: "Mindestens ein öffentlich angekündigtes Turnier (Bingo) + weitere Diskussions-Threads." }
+      ];
+      el("summaryList").innerHTML = summary.map(s => `
+        <div class="item">
+          <h3>${escapeHtml(s.t)}</h3>
+          <p>${escapeHtml(s.p)}</p>
+        </div>
+      `).join("");
 
-function spawnObstacles(){
-  obstacles=[];
-  if(!obstaclesOnEl.checked) return;
-  const count = diffEl.value==="easy"?6: diffEl.value==="hard"?12:9;
-  for(let i=0;i<count;i++){
-    obstacles.push(randPos([...snake,food,...obstacles]));
-  }
-}
+      // Events
+      el("eventsList").innerHTML = DATA.forumHighlights
+        .filter(x => x.type === "Event")
+        .map(x => eventCard(x)).join("");
 
-function spawnPower(){
-  if(!powersOnEl.checked) return null;
-  if(Math.random()<0.02){ // selten
-    const types=["slow","bonus"];
-    return { ...randPos([...snake,food,...obstacles]), type: types[Math.floor(Math.random()*types.length)] };
-  }
-  return null;
-}
+      // Forum links (all highlights)
+      el("forumLinks").innerHTML = DATA.forumHighlights.map(x => `
+        <div class="item" data-search="${escapeHtml((x.title + " " + x.summary + " " + x.type).toLowerCase())}">
+          <h3>${escapeHtml(x.title)}</h3>
+          <p class="small">${escapeHtml(x.type)} · ${escapeHtml(x.date)}</p>
+          <p>${escapeHtml(x.summary)}</p>
+          <p style="margin-top:10px"><a href="${x.url}" target="_blank" rel="noreferrer">Thread öffnen</a></p>
+        </div>
+      `).join("");
 
-function start(){
-  snake=[{x:10,y:10}];
-  dx=1; dy=0;
-  score=0; paused=false; over=false; power=null;
-  speed = speedFromDiff(diffEl.value);
-  food = randPos(snake);
-  spawnObstacles();
-  scoreEl.textContent=score;
-  hideMenu();
-  clearInterval(timer);
-  timer=setInterval(loop,speed);
-}
+      // FAQ
+      el("faqList").innerHTML = DATA.faq.map(x => `
+        <details>
+          <summary>${escapeHtml(x.q)}</summary>
+          <p>${escapeHtml(x.a)}</p>
+        </details>
+      `).join("");
 
-function loop(){
-  if(paused||over) return;
-  update(); draw();
-}
-
-function update(){
-  let nx=snake[0].x+dx, ny=snake[0].y+dy;
-  if(nx<0||ny<0||nx>=tiles||ny>=tiles){ end(); return; }
-  const head={x:nx,y:ny};
-  if(snake.some(s=>s.x===head.x&&s.y===head.y)) { end(); return; }
-  if(obstacles.some(o=>o.x===head.x&&o.y===head.y)) { end(); return; }
-
-  snake.unshift(head);
-
-  // Food
-  if(head.x===food.x&&head.y===food.y){
-    score++; scoreEl.textContent=score;
-    food = randPos([...snake,...obstacles]);
-    if(score%5===0 && speed>70){
-      speed-=8; clearInterval(timer); timer=setInterval(loop,speed);
+      // Sources
+      el("sources").innerHTML = DATA.sources.map(s => `
+        <div class="item">
+          <h3>${escapeHtml(s.label)}</h3>
+          <p><a href="${s.url}" target="_blank" rel="noreferrer">${escapeHtml(s.url)}</a></p>
+        </div>
+      `).join("");
     }
-    if(!power) power = spawnPower();
-  } else snake.pop();
 
-  // Power-Up
-  if(power && head.x===power.x && head.y===power.y){
-    if(power.type==="slow"){
-      slowUntil = Date.now()+3000;
-      clearInterval(timer);
-      timer=setInterval(loop, speed+60);
+    function eventCard(x){
+      return `
+        <div class="item">
+          <h3>${escapeHtml(x.title)}</h3>
+          <p class="small">${escapeHtml(x.date)} · ${escapeHtml(x.type)}</p>
+          <p>${escapeHtml(x.summary)}</p>
+          <p style="margin-top:10px"><a href="${x.url}" target="_blank" rel="noreferrer">Forum-Thread öffnen</a></p>
+        </div>
+      `;
     }
-    if(power.type==="bonus"){
-      score+=3; scoreEl.textContent=score;
+
+    // ---------- Interactions ----------
+    function toast(msg){
+      el("toastMsg").textContent = msg;
+      el("toast").classList.add("show");
+      window.clearTimeout(toast._t);
+      toast._t = window.setTimeout(() => el("toast").classList.remove("show"), 1400);
     }
-    power=null;
-  }
 
-  // Slow endet
-  if(slowUntil && Date.now()>slowUntil){
-    slowUntil=0;
-    clearInterval(timer);
-    timer=setInterval(loop, speed);
-  }
-}
+    el("themeBtn").addEventListener("click", () => {
+      const root = document.body;
+      root.dataset.theme = (root.dataset.theme === "dark") ? "light" : "dark";
+      toast(`Theme: ${root.dataset.theme}`);
+    });
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+    el("copyContacts").addEventListener("click", async () => {
+      const txt = DATA.clan.contactsDiscord.join(", ");
+      await copy(txt);
+      toast("Kontakt-Namen kopiert.");
+    });
 
-  // Obstacles
-  ctx.fillStyle="#475569";
-  obstacles.forEach(o=>{
-    ctx.fillRect(o.x*grid+2,o.y*grid+2,grid-4,grid-4);
-  });
+    el("openDiscord").addEventListener("click", () => {
+      // Sicher: Clanpage öffnen (dort ist ein Invite-Link sichtbar)
+      window.open(DATA.clan.gommeClanpage, "_blank", "noreferrer");
+    });
 
-  // Snake
-  ctx.shadowBlur=12; ctx.shadowColor="#22c55e";
-  ctx.fillStyle="#22c55e";
-  snake.forEach((p,i)=>{
-    const pad=i===0?0:1;
-    ctx.fillRect(p.x*grid+pad,p.y*grid+pad,grid-2*pad,grid-2*pad);
-  });
+    el("copyDiscord").addEventListener("click", async () => {
+      // Invite-Link ist auf der Clanpage als discord.gg sichtbar, aber hier nicht extrahiert.
+      // Deshalb: Nutzerfreundlich -> Clanpage-Link kopieren.
+      await copy(DATA.clan.gommeClanpage);
+      toast("Clanpage-Link kopiert (Invite dort sichtbar).");
+    });
 
-  // Food
-  ctx.shadowBlur=16; ctx.shadowColor="#ef4444";
-  ctx.fillStyle="#ef4444";
-  ctx.fillRect(food.x*grid+2,food.y*grid+2,grid-4,grid-4);
+    // Search
+    const search = el("search");
+    search.addEventListener("input", () => {
+      const q = search.value.trim().toLowerCase();
+      document.querySelectorAll("#forumLinks .item").forEach(card => {
+        const hay = (card.getAttribute("data-search") || "");
+        card.style.display = (!q || hay.includes(q)) ? "" : "none";
+      });
+    });
 
-  // Power-Up
-  if(power){
-    ctx.shadowBlur=16;
-    ctx.shadowColor = power.type==="slow" ? "#60a5fa" : "#a855f7";
-    ctx.fillStyle = power.type==="slow" ? "#60a5fa" : "#a855f7";
-    ctx.beginPath();
-    ctx.arc(power.x*grid+10,power.y*grid+10,7,0,Math.PI*2);
-    ctx.fill();
-  }
-  ctx.shadowBlur=0;
-}
+    // Keyboard shortcut: Ctrl+K focuses search
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        search.focus();
+      }
+    });
 
-function end(){
-  over=true;
-  let msg=`Score: ${score}`;
-  if(score>high){ high=score; localStorage.setItem("snake_high",high); highEl.textContent=high; msg+=" · Neuer Highscore"; }
-  showMenu("over",msg);
-}
+    async function copy(text){
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch{
+        // Fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+    }
 
-document.addEventListener("keydown",e=>{
-  if(e.key===" "){
-    if(overlay.style.display==="flex") return;
-    paused=!paused; stateEl.textContent=paused?"PAUSE":"PLAY"; return;
-  }
-  if(paused||overlay.style.display==="flex") return;
-  if(e.key==="ArrowUp"&&dy===0){dx=0;dy=-1}
-  if(e.key==="ArrowDown"&&dy===0){dx=0;dy=1}
-  if(e.key==="ArrowLeft"&&dx===0){dx=-1;dy=0}
-  if(e.key==="ArrowRight"&&dx===0){dx=1;dy=0}
-});
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+    function shortUrl(u){
+      try{
+        const x = new URL(u);
+        return x.hostname + x.pathname.replace(/\/$/,"");
+      }catch{ return u; }
+    }
 
-// Start im Menü
-showMenu();
-</script>
+    render();
+  </script>
 </body>
 </html>
