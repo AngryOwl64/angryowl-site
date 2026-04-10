@@ -3,771 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A technically grounded comparison of C++ and Java across performance, memory control, determinism, deployment, and real-world engineering trade-offs.">
-    <meta name="theme-color" content="#07111c">
-    <title>C++ vs Java: A Technical Comparison</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <meta name="description" content="Retro-styled multi-page technical dossier comparing C++ and Java across domains, benchmarks, tooling, and trade-offs.">
+    <meta name="theme-color" content="#c0c0c0">
+    <title>C++ vs Java Control Center</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+    <script type="module" src="assets/js/pages/home-page.js"></script>
 </head>
-<body>
-    <div class="page-shell">
-        <header class="site-header">
-            <nav class="nav container" aria-label="Main navigation">
-                <a class="brand" href="#top" aria-label="Go to top">
-                    <span class="brand-mark">&lt;/&gt;</span>
-                    <span class="brand-text">C++ vs Java</span>
+<body data-page="home">
+    <div class="site-shell">
+        <header class="topbar">
+            <div class="container topbar-inner">
+                <a class="brand" href="index.html">
+                    <span class="brand-led"></span>
+                    <span class="brand-text">C++ VS JAVA CONTROL CENTER</span>
                 </a>
-                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="nav-links" id="nav-links">
-                    <a href="#performance">Performance</a>
-                    <a href="#control">Low-Level Control</a>
-                    <a href="#determinism">Determinism</a>
-                    <a href="#deployment">Deployment</a>
-                    <a href="#benchmarks">Benchmarks</a>
-                    <a href="#selector">Selector</a>
-                </div>
-            </nav>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle site navigation">MENU</button>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <a data-nav href="index.html">HOME.EXE</a>
+                    <a data-nav href="pages/domains.html">DOMAINS.TXT</a>
+                    <a data-nav href="pages/benchmarks.html">BENCH.EXE</a>
+                    <a data-nav href="pages/lab.html">LAB.BAT</a>
+                    <a data-nav href="pages/archive.html">ARCHIVE.HLP</a>
+                </nav>
+            </div>
         </header>
 
-        <main id="top">
-            <section class="hero section">
-                <div class="container hero-grid">
-                    <div class="hero-copy reveal">
-                        <p class="eyebrow">Engineering trade-offs, not language tribalism</p>
-                        <h1>C++ vs Java: A Technical Comparison</h1>
-                        <p class="hero-lead">
-                            This site focuses on the domains where C++ tends to outperform Java for structural reasons:
-                            tighter memory control, lower runtime overhead, better determinism, and native deployment.
-                            It also stays honest about the cases where Java remains the stronger engineering choice.
-                        </p>
-                        <div class="hero-actions">
-                            <a class="button button-primary" href="#benchmarks">Explore Benchmarks</a>
-                            <a class="button button-secondary" href="#java-better">See Where Java Wins</a>
+        <main class="page-main">
+            <section class="container page-section">
+                <div class="window hero-window">
+                    <div class="window-bar">
+                        <span class="window-title">ROOT://STARTUP</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                        <p class="hero-note">
-                            Benchmark figures on this page are mock but realistic illustrations for equivalent implementations on modern x86-64 hardware.
-                        </p>
                     </div>
+                    <div class="window-body hero-grid">
+                        <div>
+                            <p class="eyebrow">BOOT MESSAGE</p>
+                            <h1 class="page-title">C++ vs Java</h1>
+                            <p class="subtitle">A technical comparison rendered like a bargain-bin operating system from 1998.</p>
+                            <p class="lead-copy">
+                                This project is deliberately bigger than a single marketing page. It is a small static site with a fake old-school C tooling aesthetic,
+                                multiple dossiers, interactive experiments, benchmark views, code labs, and a fair section on where Java is objectively the better tool.
+                            </p>
+                            <div class="button-row">
+                                <a class="retro-button" href="pages/benchmarks.html">OPEN BENCHMARK LAB</a>
+                                <a class="retro-button alt" href="pages/lab.html">RUN INTERACTIVE LAB</a>
+                            </div>
+                        </div>
+                        <div class="terminal-panel">
+                            <pre class="ascii-block">C:\COMPARE&gt; dir
 
-                    <aside class="hero-panel reveal" aria-label="Technical summary">
-                        <div class="terminal-card">
-                            <div class="terminal-bar">
+[TXT] DOMAINS     performance / memory / deployment
+[EXE] BENCHMARKS  interactive charts and profiles
+[BAT] LAB         calculators / simulators / picks
+[HLP] ARCHIVE     myths / glossary / faq / notes
+
+C:\COMPARE&gt; verdict
+C++ dominates where latency, layout and footprint
+are product requirements, not implementation detail.
+
+Java remains stronger when developer throughput,
+framework leverage and managed safety are the priority.</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">SITE_DIRECTORY.LST</span>
+                            <div class="window-actions">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </div>
-                            <div class="terminal-body">
-                                <p><span class="prompt">$</span> target domains</p>
-                                <p>games, embedded, trading, engines, tools</p>
-                                <p><span class="prompt">$</span> optimize_for</p>
-                                <p>tail latency, startup, footprint, hardware access</p>
-                                <p><span class="prompt">$</span> result</p>
-                                <p class="terminal-highlight">C++ usually wins when the machine model matters.</p>
+                        </div>
+                        <div class="window-body">
+                            <div class="directory-list">
+                                <a class="directory-item" href="pages/domains.html">
+                                    <strong>DOMAINS.TXT</strong>
+                                    <span>Core arguments, comparison tables, real-world domain fit, and where Java wins.</span>
+                                </a>
+                                <a class="directory-item" href="pages/benchmarks.html">
+                                    <strong>BENCH.EXE</strong>
+                                    <span>Interactive charts for execution, memory, startup, and tail-latency profiles.</span>
+                                </a>
+                                <a class="directory-item" href="pages/lab.html">
+                                    <strong>LAB.BAT</strong>
+                                    <span>Code comparison, use-case recommender, weighted decision engine, and latency simulator.</span>
+                                </a>
+                                <a class="directory-item" href="pages/archive.html">
+                                    <strong>ARCHIVE.HLP</strong>
+                                    <span>Glossary, myths vs reality, deployment cheat sheet, and closing notes.</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="summary-grid">
-                            <article class="summary-card">
-                                <span class="summary-value">Lower p99</span>
-                                <span class="summary-label">No GC pause budget in the hot path</span>
-                            </article>
-                            <article class="summary-card">
-                                <span class="summary-value">Native boot</span>
-                                <span class="summary-label">Fast startup without a JVM process</span>
-                            </article>
-                            <article class="summary-card">
-                                <span class="summary-value">Exact layout</span>
-                                <span class="summary-label">Control over memory and binary interfaces</span>
-                            </article>
-                            <article class="summary-card">
-                                <span class="summary-value">Fair trade-offs</span>
-                                <span class="summary-label">Java still leads in productivity-heavy systems</span>
-                            </article>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">STATUS_MONITOR.SYS</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
-                    </aside>
+                        <div class="window-body">
+                            <div class="status-stack">
+                                <div class="status-card">
+                                    <span class="status-label">CURRENT MODE</span>
+                                    <strong>TECHNICAL, NOT TRIBAL</strong>
+                                </div>
+                                <div class="status-card">
+                                    <span class="status-label">DESIGN TARGET</span>
+                                    <strong>OLD TOOLCHAIN / LOW BUDGET / HIGH OPINION</strong>
+                                </div>
+                                <div class="status-card">
+                                    <span class="status-label">ROTATING MESSAGE</span>
+                                    <strong class="js-rotating-status">Loading operator note...</strong>
+                                </div>
+                                <div class="status-card">
+                                    <span class="status-label">LOCAL CLOCK</span>
+                                    <strong class="js-clock">--:--:--</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </section>
 
-            <section class="section">
-                <div class="container">
-                    <div class="overview-grid">
-                        <article class="overview-card reveal">
-                            <p class="card-kicker">Why teams pick C++</p>
-                            <h2>When control is part of the product</h2>
-                            <p>
-                                C++ matters when performance is not just a nice-to-have, but the defining constraint:
-                                frame pacing, strict latency budgets, fixed memory ceilings, and direct interaction with hardware or operating system primitives.
-                            </p>
-                        </article>
-                        <article class="overview-card reveal">
-                            <p class="card-kicker">Why teams still pick Java</p>
-                            <h2>When throughput of people matters more</h2>
-                            <p>
-                                Java shines when maintainability, large-team productivity, and mature enterprise tooling dominate the decision.
-                                That makes it excellent for business systems, services, and backend platforms.
-                            </p>
-                        </article>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section topic-section" id="performance">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Core Argument 01</p>
-                        <h2>Performance &amp; Memory Control</h2>
-                        <p>
-                            C++ lets engineers decide where data lives, when it is destroyed, and how much allocation happens in the hot path.
-                            Java can deliver strong throughput, but object allocation patterns and garbage collection introduce costs that are harder to make invisible in latency-sensitive workloads.
-                        </p>
-                    </div>
-                    <div class="topic-grid">
-                        <article class="card prose-card reveal">
-                            <h3>Why the gap appears</h3>
-                            <p>
-                                In C++, stack allocation, RAII, custom allocators, and cache-aware data structures give the developer direct leverage over the memory behavior of the program.
-                                Java usually allocates objects on the heap and relies on a garbage collector to reclaim them later.
-                            </p>
-                            <p>
-                                Modern JVMs are highly optimized, but the runtime still has to track object lifetimes, manage heap generations, and occasionally pause or coordinate threads to clean up memory.
-                            </p>
-                        </article>
-                        <article class="card table-card reveal">
-                            <div class="table-wrap">
-                                <table>
-                                    <caption>Performance and memory trade-offs</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Dimension</th>
-                                            <th scope="col">C++</th>
-                                            <th scope="col">Java</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Allocation model</th>
-                                            <td>Stack and heap, explicit ownership, custom allocators</td>
-                                            <td>Mostly heap objects managed by GC</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">10M record transform</th>
-                                            <td>~480 ms, ~220 MB RSS</td>
-                                            <td>~690 ms, ~360 MB heap</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Tail latency under allocation pressure</th>
-                                            <td>Usually bounded by programmer choices</td>
-                                            <td>Can spike during collection or compaction</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Cache locality</th>
-                                            <td>Structs and contiguous layouts are routine</td>
-                                            <td>Often more indirection between objects</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <section class="container page-section">
+                <div class="grid-three">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">WHY_CPP.CFG</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </div>
-                        </article>
-                        <article class="card snippet-card reveal">
-                            <div class="card-header">
-                                <h3>Hot-path allocation example</h3>
-                                <span class="pill">C++ can pre-allocate exactly</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-keyword">std::vector</span><span class="token-operator">&lt;</span><span class="token-type">Order</span><span class="token-operator">&gt;</span> book;
-book.<span class="token-function">reserve</span>(<span class="token-number">50'000</span>);
-
-<span class="token-keyword">for</span> (<span class="token-keyword">const</span> <span class="token-keyword">auto</span><span class="token-operator">&amp;</span> update : feed) {
-    book.<span class="token-function">emplace_back</span>(update);
-}</code></pre>
-                            <p>
-                                Reserving capacity up front is a simple example of why C++ often gives tighter control over allocation churn and memory locality.
-                            </p>
-                        </article>
-                        <article class="card relevance-card reveal">
-                            <h3>Real-world relevance</h3>
-                            <ul class="bullet-list">
-                                <li>Trading engines often care about p99.9 latency, not just average throughput.</li>
-                                <li>Physics, rendering, and simulation loops benefit from predictable allocation behavior.</li>
-                                <li>Large in-memory data pipelines often gain from dense layouts and fewer object wrappers.</li>
+                        </div>
+                        <div class="window-body">
+                            <ul class="bullet-panel">
+                                <li>Predictable memory and fewer runtime surprises.</li>
+                                <li>Direct hardware-near programming and native interfaces.</li>
+                                <li>Smaller runtime footprint and faster cold starts.</li>
+                                <li>Best fit for engines, embedded systems, and low-latency loops.</li>
                             </ul>
-                        </article>
-                    </div>
-                </div>
-            </section>
-            <section class="section topic-section" id="control">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Core Argument 02</p>
-                        <h2>Low-Level Control</h2>
-                        <p>
-                            C++ exposes pointers, manual layout decisions, intrinsics, and direct native APIs. That makes it suitable for systems code, protocol implementations, drivers, and engine internals where exact bytes and instruction paths matter.
-                        </p>
-                    </div>
-                    <div class="topic-grid">
-                        <article class="card prose-card reveal">
-                            <h3>Closer to the machine model</h3>
-                            <p>
-                                C++ allows developers to shape memory layout, align data for cache lines, use atomics precisely, and integrate directly with platform SDKs.
-                                Java can reach native code through JNI, but the native boundary itself becomes part of the design and operational complexity.
-                            </p>
-                        </article>
-                        <article class="card table-card reveal">
-                            <div class="table-wrap">
-                                <table>
-                                    <caption>Control over layout and hardware interaction</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Dimension</th>
-                                            <th scope="col">C++</th>
-                                            <th scope="col">Java</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Pointers and references</th>
-                                            <td>Native language feature</td>
-                                            <td>Abstracted away from user code</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Memory layout</th>
-                                            <td>Can be tuned and inspected directly</td>
-                                            <td>Layout is VM-defined and opaque</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Hardware-adjacent APIs</th>
-                                            <td>Direct access to OS and device interfaces</td>
-                                            <td>Usually requires JNI or external libraries</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Interop overhead</th>
-                                            <td>No language boundary when already native</td>
-                                            <td>JNI adds marshaling and operational complexity</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </article>
-                        <article class="card snippet-card reveal">
-                            <div class="card-header">
-                                <h3>Binary layout matters</h3>
-                                <span class="pill">Useful for packets, files, and engines</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-keyword">struct</span> <span class="token-type">PacketHeader</span> {
-    <span class="token-type">std::uint16_t</span> type;
-    <span class="token-type">std::uint32_t</span> payloadBytes;
-    <span class="token-type">std::uint16_t</span> flags;
-};
+                        </div>
+                    </article>
 
-<span class="token-keyword">static_assert</span>(<span class="token-function">sizeof</span>(PacketHeader) <span class="token-operator">==</span> <span class="token-number">8</span>);</code></pre>
-                            <p>
-                                In Java, objects do not provide this kind of layout guarantee without moving through buffers and VM-specific abstractions.
-                            </p>
-                        </article>
-                        <article class="card relevance-card reveal">
-                            <h3>Real-world relevance</h3>
-                            <ul class="bullet-list">
-                                <li>Game engines use C++ for memory arenas, SIMD kernels, and platform integration.</li>
-                                <li>Embedded systems need predictable memory maps and direct hardware access.</li>
-                                <li>Protocol parsers and media pipelines often depend on tight binary layouts.</li>
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">WHY_JAVA.CFG</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <ul class="bullet-panel">
+                                <li>Excellent enterprise frameworks and operational tooling.</li>
+                                <li>Managed memory removes entire classes of ownership bugs.</li>
+                                <li>Large teams ship business software faster on the JVM.</li>
+                                <li>Strong choice for backend systems where absolute control is not the goal.</li>
                             </ul>
-                        </article>
-                    </div>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">SITE_NOTES.NFO</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <p class="small-copy">
+                                The ugly retro look is intentional. The content is not. Every section still aims to be technically defensible,
+                                with realistic benchmark numbers, explicit trade-offs, and a clear separation between language strengths and ideology.
+                            </p>
+                        </div>
+                    </article>
                 </div>
             </section>
 
-            <section class="section topic-section" id="determinism">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Core Argument 03</p>
-                        <h2>Determinism</h2>
-                        <p>
-                            Determinism is about how stable the program behaves under pressure, not just whether it is fast on average.
-                            C++ tends to make timing behavior easier to reason about because it avoids runtime services such as garbage collection in the default execution model.
-                        </p>
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">START_HERE.INI</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
-                    <div class="topic-grid">
-                        <article class="card prose-card reveal">
-                            <h3>Latency budgets dislike surprises</h3>
-                            <p>
-                                Java's low-pause collectors have improved dramatically, but they still introduce another subsystem whose behavior must be tuned and monitored.
-                                In real-time rendering, embedded control loops, and market data systems, even a rare pause can be unacceptable.
-                            </p>
-                        </article>
-                        <article class="card table-card reveal">
-                            <div class="table-wrap">
-                                <table>
-                                    <caption>Determinism and timing behavior</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Dimension</th>
-                                            <th scope="col">C++</th>
-                                            <th scope="col">Java</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Runtime pauses</th>
-                                            <td>No GC pauses by default</td>
-                                            <td>GC and safepoints can affect latency</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Warm-up behavior</th>
-                                            <td>Native code starts at full speed immediately</td>
-                                            <td>JIT may need warm-up for peak optimization</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Frame-time consistency</th>
-                                            <td>More directly controlled</td>
-                                            <td>Requires careful tuning and object discipline</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Hard real-time suitability</th>
-                                            <td>Possible with disciplined design</td>
-                                            <td>Generally not the default choice</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </article>
-                        <article class="card snippet-card reveal">
-                            <div class="card-header">
-                                <h3>Fixed-step loops reward predictability</h3>
-                                <span class="pill">Games and control systems</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-keyword">while</span> (running) {
-    <span class="token-keyword">auto</span> frameStart <span class="token-operator">=</span> clock.<span class="token-function">now</span>();
-    <span class="token-function">poll_input</span>();
-    <span class="token-function">simulate</span>();
-    <span class="token-function">render</span>();
-    <span class="token-function">sleep_until_next_tick</span>(frameStart);
-}</code></pre>
-                            <p>
-                                The fewer background runtime events in the loop, the easier it is to keep frame pacing or control-loop timing within bounds.
-                            </p>
-                        </article>
-                        <article class="card relevance-card reveal">
-                            <h3>Real-world relevance</h3>
-                            <ul class="bullet-list">
-                                <li>Fast-twitch multiplayer games depend on stable frame and simulation timing.</li>
-                                <li>Industrial and embedded controllers often have strict timing constraints.</li>
-                                <li>Low-latency trading systems optimize for jitter as much as raw speed.</li>
-                            </ul>
-                        </article>
-                    </div>
-                </div>
-            </section>
-            <section class="section topic-section" id="deployment">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Core Argument 04</p>
-                        <h2>Binary &amp; Deployment</h2>
-                        <p>
-                            C++ typically ships as a native executable or shared library. Java usually ships bytecode that depends on a JVM runtime at execution time.
-                            That difference affects startup, footprint, packaging, and operational simplicity.
-                        </p>
-                    </div>
-                    <div class="topic-grid">
-                        <article class="card prose-card reveal">
-                            <h3>Deployment characteristics matter</h3>
-                            <p>
-                                A native binary can be small, direct, and fast to start. Java gains portability through the JVM, but that portability comes with a runtime dependency and often a larger memory baseline.
-                                For short-lived tools, CLI utilities, and serverless-style workloads, startup costs become visible very quickly.
-                            </p>
-                        </article>
-                        <article class="card table-card reveal">
-                            <div class="table-wrap">
-                                <table>
-                                    <caption>Packaging and runtime footprint</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Dimension</th>
-                                            <th scope="col">C++</th>
-                                            <th scope="col">Java</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Deliverable</th>
-                                            <td>Native binary or shared object</td>
-                                            <td>JAR/WAR plus JVM runtime</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Cold start</th>
-                                            <td>Often 5-50 ms for small tools</td>
-                                            <td>Often 100-900 ms depending on app size</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Baseline memory</th>
-                                            <td>Can stay very lean</td>
-                                            <td>Higher due to VM and heap reservation</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Cross-platform story</th>
-                                            <td>Per-target build artifacts</td>
-                                            <td>Strong bytecode portability on the JVM</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </article>
-                        <article class="card snippet-card reveal">
-                            <div class="card-header">
-                                <h3>Operational feel</h3>
-                                <span class="pill">Native tool vs managed runtime</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-comment">// Native deployment</span>
-./log-inspector --input prod.log
-
-<span class="token-comment">// Managed deployment</span>
-java -jar log-inspector.jar --input prod.log</code></pre>
-                            <p>
-                                The trade-off is straightforward: Java buys runtime portability and ecosystem support; C++ buys direct native execution with less runtime baggage.
-                            </p>
-                        </article>
-                        <article class="card relevance-card reveal">
-                            <h3>Real-world relevance</h3>
-                            <ul class="bullet-list">
-                                <li>CLI tools feel better when startup is near-instant.</li>
-                                <li>Edge devices and appliances benefit from a smaller runtime footprint.</li>
-                                <li>Short-lived jobs and plugins often pay a visible JVM startup tax.</li>
-                            </ul>
-                        </article>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section topic-section" id="use-cases">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Core Argument 05</p>
-                        <h2>Use Cases Where C++ Dominates</h2>
-                        <p>
-                            These are not arbitrary preferences. They are domains where the cost model of the language directly affects product quality, operational behavior, or hardware feasibility.
-                        </p>
-                    </div>
-                    <div class="use-case-grid">
-                        <article class="card domain-card reveal">
-                            <h3>Game engines</h3>
-                            <p>Frame pacing, memory arenas, GPU APIs, and custom allocators all favor C++.</p>
-                            <span class="tag">Why Java is rarer: GC jitter and weaker native engine integration</span>
-                        </article>
-                        <article class="card domain-card reveal">
-                            <h3>Embedded systems</h3>
-                            <p>Limited RAM, direct hardware access, and tight binaries make native code the practical default.</p>
-                            <span class="tag">Why Java is rarer: runtime overhead and constrained-device fit</span>
-                        </article>
-                        <article class="card domain-card reveal">
-                            <h3>High-frequency trading</h3>
-                            <p>Teams optimize for jitter, cache locality, and predictable latency, not only average speed.</p>
-                            <span class="tag">Why Java is rarer: GC and runtime tuning are operational risks</span>
-                        </article>
-                        <article class="card domain-card reveal">
-                            <h3>OS-level development</h3>
-                            <p>Kernel-adjacent, driver, and runtime infrastructure layers need direct system interfaces.</p>
-                            <span class="tag">Why Java is rarer: it depends on a runtime built on top of the OS</span>
-                        </article>
-                    </div>
-                    <div class="card table-card reveal">
-                        <div class="table-wrap">
-                            <table>
-                                <caption>Domain fit by technical constraint</caption>
+                    <div class="window-body">
+                        <div class="table-shell">
+                            <table class="retro-table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Domain</th>
-                                        <th scope="col">Why C++ fits</th>
-                                        <th scope="col">Java trade-off</th>
+                                        <th>MODULE</th>
+                                        <th>WHAT IT DOES</th>
+                                        <th>WHY IT EXISTS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Rendering / engines</th>
-                                        <td>Native graphics APIs, SIMD, custom memory systems</td>
-                                        <td>Managed runtime gets in the way of engine internals</td>
+                                        <td>DOMAINS.TXT</td>
+                                        <td>Breaks down performance, control, determinism and deployment.</td>
+                                        <td>Turns vague opinions into explicit engineering trade-offs.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Firmware / embedded</th>
-                                        <td>Precise control over memory, startup, and binary size</td>
-                                        <td>JVM runtime is often impractical on constrained devices</td>
+                                        <td>BENCH.EXE</td>
+                                        <td>Visualizes execution time, memory, startup and jitter.</td>
+                                        <td>Shows the kinds of deltas teams actually care about.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Ultra-low latency services</th>
-                                        <td>Lower jitter and tighter control of allocations</td>
-                                        <td>Excellent JVM tuning exists, but at higher complexity</td>
+                                        <td>LAB.BAT</td>
+                                        <td>Lets visitors test use cases, priorities and latency pressure.</td>
+                                        <td>Makes the comparison interactive instead of static.</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">System software</th>
-                                        <td>Direct OS integration and native ABI interoperability</td>
-                                        <td>Depends on native components beneath the VM</td>
+                                        <td>ARCHIVE.HLP</td>
+                                        <td>Collects myths, glossary entries, FAQs and cheat sheets.</td>
+                                        <td>Adds depth so the project feels like a dossier, not a flyer.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section counterbalance-section" id="java-better">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Counterbalance</p>
-                        <h2>Where Java Is Better</h2>
-                        <p>
-                            A fair comparison has to acknowledge that Java is often the stronger choice when the main problem is delivering business software quickly, safely, and consistently across large teams.
-                        </p>
-                    </div>
-                    <div class="counter-grid">
-                        <article class="card counter-card reveal">
-                            <h3>Developer productivity</h3>
-                            <p>
-                                Java reduces classes of memory-management mistakes and gives teams a predictable programming model.
-                                That often means faster onboarding, easier maintenance, and fewer low-level failure modes.
-                            </p>
-                        </article>
-                        <article class="card counter-card reveal">
-                            <h3>Ecosystem and tooling</h3>
-                            <p>
-                                The JVM ecosystem remains outstanding for enterprise backends, dependency management, profiling, frameworks, and observability.
-                                Spring-based systems exist for a reason: they are productive and battle-tested.
-                            </p>
-                        </article>
-                        <article class="card counter-card reveal">
-                            <h3>Safety and memory management</h3>
-                            <p>
-                                Garbage collection and managed runtimes lower the chance of use-after-free bugs, double frees, and many ownership mistakes.
-                                That safety margin matters in business software where latency is not the primary constraint.
-                            </p>
-                        </article>
-                    </div>
-                    <div class="card table-card reveal">
-                        <div class="table-wrap">
-                            <table>
-                                <caption>Situations where Java is often the better engineering choice</caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Situation</th>
-                                        <th scope="col">Why Java often wins</th>
-                                        <th scope="col">Why C++ may be overkill</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Enterprise web backends</th>
-                                        <td>Mature frameworks, tooling, and staffing pool</td>
-                                        <td>Lower-level control does not always justify extra complexity</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Large CRUD-heavy systems</th>
-                                        <td>Maintainability and productivity outweigh raw speed</td>
-                                        <td>Memory ownership detail slows teams down</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Long-lived business platforms</th>
-                                        <td>Managed runtime safety and ecosystem stability</td>
-                                        <td>Native optimization is often not the bottleneck</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section benchmark-section" id="benchmarks">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Interactive Data</p>
-                        <h2>Benchmark Visualization</h2>
-                        <p>
-                            These charts show illustrative, realistic benchmark deltas for comparable workloads.
-                            They are intended to communicate typical engineering patterns, not to claim one fixed multiplier across every application.
-                        </p>
-                    </div>
-                    <div class="benchmark-layout">
-                        <article class="card benchmark-controls reveal">
-                            <div class="metric-switch" role="tablist" aria-label="Benchmark metric">
-                                <button class="metric-button is-active" type="button" data-metric="execution" aria-pressed="true">Execution time</button>
-                                <button class="metric-button" type="button" data-metric="memory" aria-pressed="false">Memory usage</button>
-                                <button class="metric-button" type="button" data-metric="startup" aria-pressed="false">Startup time</button>
-                            </div>
-                            <div class="benchmark-meta">
-                                <p class="benchmark-label">Current metric</p>
-                                <h3 id="benchmark-title">Execution time</h3>
-                                <p id="benchmark-description">
-                                    Lower is better. Equivalent implementations favor C++ when allocation pressure and native optimization matter.
-                                </p>
-                            </div>
-                        </article>
-                        <article class="card benchmark-chart reveal">
-                            <div class="chart-head">
-                                <span class="chart-note">Lower is better</span>
-                                <span class="chart-note">Illustrative data</span>
-                            </div>
-                            <div id="benchmark-chart" class="chart-rows" aria-live="polite"></div>
-                        </article>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section code-section" id="code">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Code Comparison</p>
-                        <h2>The Same Task in Both Languages</h2>
-                        <p>
-                            The example below counts lines that contain the word <strong>ERROR</strong>. The Java version is perfectly reasonable, but the C++ version exposes more direct control over file access, buffers, and the exact runtime environment.
-                        </p>
-                    </div>
-                    <div class="code-grid">
-                        <article class="card code-card reveal">
-                            <div class="card-header">
-                                <h3>C++</h3>
-                                <span class="pill">Native executable</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-preprocessor">#include</span> <span class="token-string">&lt;fstream&gt;</span>
-<span class="token-preprocessor">#include</span> <span class="token-string">&lt;iostream&gt;</span>
-<span class="token-preprocessor">#include</span> <span class="token-string">&lt;string&gt;</span>
-
-<span class="token-type">int</span> <span class="token-function">main</span>() {
-    <span class="token-type">std::ifstream</span> input(<span class="token-string">"app.log"</span>);
-    <span class="token-type">std::string</span> line;
-    <span class="token-type">std::size_t</span> errors <span class="token-operator">=</span> <span class="token-number">0</span>;
-
-    <span class="token-keyword">while</span> (<span class="token-function">std::getline</span>(input, line)) {
-        <span class="token-keyword">if</span> (line.<span class="token-function">find</span>(<span class="token-string">"ERROR"</span>) <span class="token-operator">!=</span> std::string::npos) {
-            <span class="token-operator">++</span>errors;
-        }
-    }
-
-    std::cout <span class="token-operator">&lt;&lt;</span> errors <span class="token-operator">&lt;&lt;</span> <span class="token-string">'\n'</span>;
-}</code></pre>
-                        </article>
-                        <article class="card code-card reveal">
-                            <div class="card-header">
-                                <h3>Java</h3>
-                                <span class="pill">Runs on the JVM</span>
-                            </div>
-                            <pre class="code-block"><code><span class="token-keyword">import</span> java.io.BufferedReader;
-<span class="token-keyword">import</span> java.io.IOException;
-<span class="token-keyword">import</span> java.nio.file.Files;
-<span class="token-keyword">import</span> java.nio.file.Path;
-
-<span class="token-keyword">public</span> <span class="token-keyword">class</span> <span class="token-type">LogCount</span> {
-    <span class="token-keyword">public</span> <span class="token-keyword">static</span> <span class="token-type">void</span> <span class="token-function">main</span>(String[] args) <span class="token-keyword">throws</span> IOException {
-        <span class="token-type">long</span> errors <span class="token-operator">=</span> <span class="token-number">0</span>;
-
-        <span class="token-keyword">try</span> (BufferedReader input <span class="token-operator">=</span> Files.<span class="token-function">newBufferedReader</span>(Path.<span class="token-function">of</span>(<span class="token-string">"app.log"</span>))) {
-            String line;
-            <span class="token-keyword">while</span> ((line <span class="token-operator">=</span> input.<span class="token-function">readLine</span>()) <span class="token-operator">!=</span> <span class="token-keyword">null</span>) {
-                <span class="token-keyword">if</span> (line.<span class="token-function">contains</span>(<span class="token-string">"ERROR"</span>)) {
-                    errors<span class="token-operator">++</span>;
-                }
-            }
-        }
-    }
-}</code></pre>
-                        </article>
-                    </div>
-                    <div class="card table-card reveal">
-                        <div class="table-wrap">
-                            <table>
-                                <caption>What changes between the two versions</caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Factor</th>
-                                        <th scope="col">C++</th>
-                                        <th scope="col">Java</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Verbosity</th>
-                                        <td>Concise, but closer to streams and native details</td>
-                                        <td>Also concise, with managed I/O abstractions</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Control</th>
-                                        <td>Easy to move toward custom buffers or memory-mapped I/O</td>
-                                        <td>Possible, but more runtime abstraction is involved</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Performance implications</th>
-                                        <td>Can scale into a fully native high-throughput pipeline</td>
-                                        <td>Often fast enough, but with JVM startup and GC considerations</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section selector-section" id="selector">
-                <div class="container">
-                    <div class="section-heading reveal">
-                        <p class="eyebrow">Interactive Tool</p>
-                        <h2>Use-Case Recommendation</h2>
-                        <p>
-                            Select a workload and the page will recommend the language that usually fits best, with explicit reasoning and trade-offs.
-                        </p>
-                    </div>
-                    <div class="selector-layout">
-                        <article class="card selector-card reveal">
-                            <label class="field-label" for="use-case-select">Choose a use case</label>
-                            <select id="use-case-select" class="field-input">
-                                <option value="game-engine">Game engine</option>
-                                <option value="embedded">Embedded system</option>
-                                <option value="hft">High-frequency trading</option>
-                                <option value="web-backend">Web backend</option>
-                                <option value="desktop-tool">Desktop / CLI tool</option>
-                            </select>
-                            <button class="button button-primary selector-button" type="button" id="run-selector">Get Recommendation</button>
-                        </article>
-                        <article class="card recommendation-card reveal" id="recommendation-output" aria-live="polite">
-                            <p class="recommendation-label">Recommendation</p>
-                            <div class="recommendation-head">
-                                <span class="recommendation-badge recommendation-badge-cpp">C++</span>
-                                <h3>Choose C++ for a game engine</h3>
-                            </div>
-                            <p class="recommendation-copy">
-                                Native graphics APIs, tight memory control, and frame-time determinism make C++ the default fit for engine internals.
-                            </p>
-                            <ul class="bullet-list">
-                                <li>Direct access to rendering, platform, and input APIs.</li>
-                                <li>Custom allocators and contiguous data structures suit ECS and asset pipelines.</li>
-                                <li>GC pauses are far less acceptable in real-time rendering loops.</li>
-                            </ul>
-                            <p class="recommendation-tradeoff">
-                                Trade-off: you gain control, but you also take on more responsibility for correctness, tooling, and memory safety.
-                            </p>
-                        </article>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section conclusion-section" id="conclusion">
-                <div class="container">
-                    <div class="conclusion-card card reveal">
-                        <p class="eyebrow">Conclusion</p>
-                        <h2>Choose the Cost Model That Matches the Job</h2>
-                        <p>
-                            C++ is stronger in performance-critical, low-level domains because it exposes the machine model rather than abstracting it away.
-                            That matters when memory layout, latency determinism, startup time, and native deployment are first-order requirements.
-                        </p>
-                        <p>
-                            Java is stronger when business productivity, safety, and ecosystem leverage matter more than squeezing out every microsecond.
-                            The right engineering answer depends on the workload, the team, and the operational constraints, not on ideology.
-                        </p>
                     </div>
                 </div>
             </section>
         </main>
 
-        <footer class="site-footer">
-            <div class="container footer-content">
-                <p>Built with plain HTML, CSS, and vanilla JavaScript for GitHub Pages.</p>
-                <p>Technical comparison with balanced trade-offs and illustrative benchmark data.</p>
+        <footer class="statusbar">
+            <div class="container statusbar-inner">
+                <span>OPERATOR: HUMAN</span>
+                <span>MODE: STATIC_SITE / NO_FRAMEWORKS</span>
+                <span>THEME: RETRO_C_UI</span>
             </div>
         </footer>
     </div>

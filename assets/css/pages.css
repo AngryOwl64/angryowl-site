@@ -1,0 +1,101 @@
+.hero-window .window-body {
+    padding-bottom: 1.05rem;
+}
+
+.hero-grid {
+    align-items: start;
+}
+
+.terminal-panel {
+    min-height: 100%;
+}
+
+.status-card strong,
+.metric-summary strong {
+    font-family: var(--mono);
+    font-size: 0.98rem;
+}
+
+.content-copy {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.checklist-box h2,
+.info-box h2,
+.myth-card h2 {
+    margin-bottom: 0.25rem;
+}
+
+.sim-output,
+#recommendation-output,
+#weighted-output {
+    min-height: 14rem;
+}
+
+.result-title {
+    margin-bottom: 0.55rem;
+    color: #33ff33;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+}
+
+.result-block {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.result-list {
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.25rem;
+}
+
+.sim-grid {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.sim-row {
+    padding: 0.5rem;
+    background: #101010;
+    border: 1px solid #4a4a4a;
+}
+
+.sim-row strong {
+    color: #ffffff;
+}
+
+.sim-bar {
+    height: 0.85rem;
+    margin-top: 0.35rem;
+    background: #2d2d2d;
+}
+
+.sim-bar-fill {
+    height: 100%;
+    width: 0;
+    transition: width 400ms ease;
+}
+
+.sim-bar-fill.cpp {
+    background: #00aa00;
+}
+
+.sim-bar-fill.java {
+    background: #aa0000;
+}
+
+@media (max-width: 640px) {
+    .retro-table {
+        min-width: 460px;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .button-row .retro-button {
+        width: 100%;
+    }
+}

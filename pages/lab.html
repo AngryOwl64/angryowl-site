@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive lab for use-case recommendations, weighted language selection, latency simulation, and code comparison.">
+    <title>Interactive Lab</title>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <script type="module" src="../assets/js/pages/lab-page.js"></script>
+</head>
+<body data-page="lab">
+    <div class="site-shell">
+        <header class="topbar">
+            <div class="container topbar-inner">
+                <a class="brand" href="../index.html">
+                    <span class="brand-led"></span>
+                    <span class="brand-text">C++ VS JAVA CONTROL CENTER</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle site navigation">MENU</button>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <a data-nav href="../index.html">HOME.EXE</a>
+                    <a data-nav href="domains.html">DOMAINS.TXT</a>
+                    <a data-nav href="benchmarks.html">BENCH.EXE</a>
+                    <a data-nav href="lab.html">LAB.BAT</a>
+                    <a data-nav href="archive.html">ARCHIVE.HLP</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="page-main">
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">LAB.BAT</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="window-body narrow-stack">
+                        <p class="eyebrow">INTERACTIVE LAB</p>
+                        <h1 class="page-title">Try The Trade-Offs Yourself</h1>
+                        <p class="lead-copy">
+                            This page turns the comparison into tools instead of paragraphs. Pick a workload, assign weights,
+                            and simulate what happens when allocation pressure climbs in a latency-sensitive system.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">CODE_COMPARE.CPP</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <h2>Same Task, Different Runtime Story</h2>
+                            <pre class="code-box">#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+    std::ifstream input("app.log");
+    std::string line;
+    std::size_t errors = 0;
+
+    while (std::getline(input, line)) {
+        if (line.find("ERROR") != std::string::npos) {
+            ++errors;
+        }
+    }
+
+    std::cout &lt;&lt; errors &lt;&lt; '\n';
+}</pre>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">CODE_COMPARE.JAVA</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <h2>Managed Version</h2>
+                            <pre class="code-box">import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class LogCount {
+    public static void main(String[] args) throws IOException {
+        long errors = 0;
+        try (BufferedReader input =
+                Files.newBufferedReader(Path.of("app.log"))) {
+            String line;
+            while ((line = input.readLine()) != null) {
+                if (line.contains("ERROR")) {
+                    errors++;
+                }
+            }
+        }
+    }
+}</pre>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">USE_CASE_PICKER.DLG</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <label class="field-label" for="use-case-select">SELECT USE CASE</label>
+                            <select class="retro-select" id="use-case-select">
+                                <option value="game-engine">GAME ENGINE</option>
+                                <option value="embedded">EMBEDDED SYSTEM</option>
+                                <option value="hft">HIGH-FREQUENCY TRADING</option>
+                                <option value="web-backend">WEB BACKEND</option>
+                                <option value="desktop-tool">DESKTOP / CLI TOOL</option>
+                            </select>
+                            <button class="retro-button wide" type="button" id="run-selector">GET RECOMMENDATION</button>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">RECOMMENDATION.OUT</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body" id="recommendation-output" aria-live="polite"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">WEIGHTED_DECISION.CALC</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <div class="slider-stack">
+                                <label class="range-row">Latency sensitivity <input id="weight-latency" type="range" min="0" max="10" value="8"></label>
+                                <label class="range-row">Developer productivity <input id="weight-productivity" type="range" min="0" max="10" value="4"></label>
+                                <label class="range-row">Memory footprint <input id="weight-footprint" type="range" min="0" max="10" value="7"></label>
+                                <label class="range-row">Ecosystem leverage <input id="weight-ecosystem" type="range" min="0" max="10" value="3"></label>
+                            </div>
+                            <button class="retro-button wide" type="button" id="run-weighted">RUN SCOREBOARD</button>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">DECISION_SCORE.OUT</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body" id="weighted-output" aria-live="polite"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">GC_PRESSURE_SIM.EXE</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="window-body">
+                        <div class="grid-two">
+                            <div>
+                                <label class="field-label" for="pressure-slider">ALLOCATION CHURN PER FRAME</label>
+                                <input id="pressure-slider" type="range" min="0" max="100" value="35">
+                                <p class="small-copy">Move the slider to simulate a workload that allocates more transient objects during a real-time loop.</p>
+                            </div>
+                            <div id="pressure-output" class="sim-output" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="statusbar">
+            <div class="container statusbar-inner">
+                <span>PAGE: LAB.BAT</span>
+                <span>MODE: INTERACTIVE</span>
+                <span><a class="status-link" href="archive.html">NEXT: ARCHIVE.HLP</a></span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

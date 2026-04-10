@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive benchmark lab comparing C++ and Java for execution time, memory, startup, and tail latency.">
+    <title>Benchmark Lab</title>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <script type="module" src="../assets/js/pages/benchmarks-page.js"></script>
+</head>
+<body data-page="benchmarks">
+    <div class="site-shell">
+        <header class="topbar">
+            <div class="container topbar-inner">
+                <a class="brand" href="../index.html">
+                    <span class="brand-led"></span>
+                    <span class="brand-text">C++ VS JAVA CONTROL CENTER</span>
+                </a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle site navigation">MENU</button>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <a data-nav href="../index.html">HOME.EXE</a>
+                    <a data-nav href="domains.html">DOMAINS.TXT</a>
+                    <a data-nav href="benchmarks.html">BENCH.EXE</a>
+                    <a data-nav href="lab.html">LAB.BAT</a>
+                    <a data-nav href="archive.html">ARCHIVE.HLP</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="page-main">
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">BENCH.EXE</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="window-body narrow-stack">
+                        <p class="eyebrow">INTERACTIVE BENCHMARK LAB</p>
+                        <h1 class="page-title">Numbers, But With Context</h1>
+                        <p class="lead-copy">
+                            These benchmark views use realistic mock data to show how the two languages usually behave under different workload profiles.
+                            The point is not to pretend every program gets the same ratio. The point is to show the shape of the trade-offs.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">PROFILE_SELECTOR.DLG</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <div class="button-row compact">
+                                <button class="retro-button tab-button is-active" type="button" data-profile="steady">STEADY LOAD</button>
+                                <button class="retro-button tab-button" type="button" data-profile="bursty">BURST LOAD</button>
+                                <button class="retro-button tab-button" type="button" data-profile="cold">COLD START</button>
+                            </div>
+                            <div class="button-row compact">
+                                <button class="retro-button tab-button is-active" type="button" data-metric="execution">EXECUTION</button>
+                                <button class="retro-button tab-button" type="button" data-metric="memory">MEMORY</button>
+                                <button class="retro-button tab-button" type="button" data-metric="startup">STARTUP</button>
+                            </div>
+                            <div class="metric-summary">
+                                <p class="status-label">CURRENT PROFILE</p>
+                                <strong id="profile-title">Steady load</strong>
+                                <p id="metric-description" class="small-copy">Lower is better. Native code usually keeps a lead when the workload is continuous and allocation patterns stay controlled.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">METHOD_NOTES.TXT</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <ul class="bullet-panel">
+                                <li>Equivalent algorithms, not deliberately bad Java.</li>
+                                <li>Modern x86-64 workstation assumptions.</li>
+                                <li>Numbers illustrate likely order-of-magnitude deltas.</li>
+                                <li>Tail-latency and startup are often more important than average throughput.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">CHART_VIEW.GRF</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="window-body">
+                        <div id="benchmark-chart" class="chart-grid" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="grid-two">
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">TAIL_LATENCY.MON</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <div id="latency-strip" class="latency-strip"></div>
+                        </div>
+                    </article>
+
+                    <article class="window">
+                        <div class="window-bar">
+                            <span class="window-title">RAW_TABLE.DAT</span>
+                            <div class="window-actions">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <div class="table-shell">
+                                <table class="retro-table" id="benchmark-table">
+                                    <thead>
+                                        <tr>
+                                            <th>WORKLOAD</th>
+                                            <th>C++</th>
+                                            <th>JAVA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="container page-section">
+                <div class="window">
+                    <div class="window-bar">
+                        <span class="window-title">INTERPRETATION.NFO</span>
+                        <div class="window-actions">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="window-body">
+                        <div class="grid-three">
+                            <article class="info-box">
+                                <h2>Execution</h2>
+                                <p>C++ benefits from native code generation, direct memory models, and fewer managed-runtime constraints.</p>
+                            </article>
+                            <article class="info-box">
+                                <h2>Memory</h2>
+                                <p>Java often spends more memory on object headers, heap behavior, and runtime baseline overhead.</p>
+                            </article>
+                            <article class="info-box">
+                                <h2>Startup</h2>
+                                <p>Native binaries win visibly when tools are short-lived or when processes are created frequently.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="statusbar">
+            <div class="container statusbar-inner">
+                <span>PAGE: BENCH.EXE</span>
+                <span>DATA: MOCK_BUT_REALISTIC</span>
+                <span><a class="status-link" href="lab.html">NEXT: LAB.BAT</a></span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
