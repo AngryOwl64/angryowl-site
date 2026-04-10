@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Interactive lab for use-case recommendations, weighted language selection, latency simulation, and code comparison.">
-    <title>Interactive Lab</title>
+    <title>lab.c</title>
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link rel="stylesheet" href="../assets/css/layout.css">
@@ -18,15 +18,15 @@
             <div class="container topbar-inner">
                 <a class="brand" href="../index.html">
                     <span class="brand-led"></span>
-                    <span class="brand-text">C++ VS JAVA CONTROL CENTER</span>
+                    <span class="brand-text">#include &lt;compare.h&gt;</span>
                 </a>
-                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle site navigation">MENU</button>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle site navigation">nav[]</button>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
-                    <a data-nav href="../index.html">HOME.EXE</a>
-                    <a data-nav href="domains.html">DOMAINS.TXT</a>
-                    <a data-nav href="benchmarks.html">BENCH.EXE</a>
-                    <a data-nav href="lab.html">LAB.BAT</a>
-                    <a data-nav href="archive.html">ARCHIVE.HLP</a>
+                    <a data-nav href="../index.html">main.c</a>
+                    <a data-nav href="domains.html">domains.h</a>
+                    <a data-nav href="benchmarks.html">bench.out</a>
+                    <a data-nav href="lab.html">lab.c</a>
+                    <a data-nav href="archive.html">archive.man</a>
                 </nav>
             </div>
         </header>
@@ -35,7 +35,7 @@
             <section class="container page-section">
                 <div class="window">
                     <div class="window-bar">
-                        <span class="window-title">LAB.BAT</span>
+                        <span class="window-title">lab.c</span>
                         <div class="window-actions">
                             <span></span>
                             <span></span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="window-body narrow-stack">
-                        <p class="eyebrow">INTERACTIVE LAB</p>
+                        <p class="eyebrow">experiments</p>
                         <h1 class="page-title">Try The Trade-Offs Yourself</h1>
                         <p class="lead-copy">
                             This page turns the comparison into tools instead of paragraphs. Pick a workload, assign weights,
@@ -57,7 +57,7 @@
                 <div class="grid-two">
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">CODE_COMPARE.CPP</span>
+                            <span class="window-title">compare.cpp</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -88,7 +88,7 @@ int main() {
 
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">CODE_COMPARE.JAVA</span>
+                            <span class="window-title">compare.java</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -125,7 +125,7 @@ public class LogCount {
                 <div class="grid-two">
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">USE_CASE_PICKER.DLG</span>
+                            <span class="window-title">selector.cfg</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -141,13 +141,13 @@ public class LogCount {
                                 <option value="web-backend">WEB BACKEND</option>
                                 <option value="desktop-tool">DESKTOP / CLI TOOL</option>
                             </select>
-                            <button class="retro-button wide" type="button" id="run-selector">GET RECOMMENDATION</button>
+                            <button class="retro-button wide" type="button" id="run-selector">print recommendation</button>
                         </div>
                     </article>
 
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">RECOMMENDATION.OUT</span>
+                            <span class="window-title">recommendation.out</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -163,7 +163,7 @@ public class LogCount {
                 <div class="grid-two">
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">WEIGHTED_DECISION.CALC</span>
+                            <span class="window-title">weights.cfg</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -177,13 +177,13 @@ public class LogCount {
                                 <label class="range-row">Memory footprint <input id="weight-footprint" type="range" min="0" max="10" value="7"></label>
                                 <label class="range-row">Ecosystem leverage <input id="weight-ecosystem" type="range" min="0" max="10" value="3"></label>
                             </div>
-                            <button class="retro-button wide" type="button" id="run-weighted">RUN SCOREBOARD</button>
+                            <button class="retro-button wide" type="button" id="run-weighted">run scoreboard</button>
                         </div>
                     </article>
 
                     <article class="window">
                         <div class="window-bar">
-                            <span class="window-title">DECISION_SCORE.OUT</span>
+                            <span class="window-title">score.out</span>
                             <div class="window-actions">
                                 <span></span>
                                 <span></span>
@@ -198,7 +198,7 @@ public class LogCount {
             <section class="container page-section">
                 <div class="window">
                     <div class="window-bar">
-                        <span class="window-title">GC_PRESSURE_SIM.EXE</span>
+                        <span class="window-title">gc_sim.c</span>
                         <div class="window-actions">
                             <span></span>
                             <span></span>
@@ -221,9 +221,9 @@ public class LogCount {
 
         <footer class="statusbar">
             <div class="container statusbar-inner">
-                <span>PAGE: LAB.BAT</span>
-                <span>MODE: INTERACTIVE</span>
-                <span><a class="status-link" href="archive.html">NEXT: ARCHIVE.HLP</a></span>
+                <span>page: lab.c</span>
+                <span>mode: interactive</span>
+                <span><a class="status-link" href="archive.html">next: archive.man</a></span>
             </div>
         </footer>
     </div>

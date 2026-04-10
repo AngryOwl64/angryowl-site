@@ -27,10 +27,10 @@ Static multi-page website for GitHub Pages.
 
 Deliberately ugly retro tooling aesthetic:
 
-- Win95 / low-budget desktop chrome
-- old C / DOS / shareware vibes
-- harsh bevels, gray panels, blue title bars
-- monospace terminals mixed with chunky UI widgets
+- old-school C toolchain / terminal / manual-page vibe
+- source-file labels like `main.c`, `domains.h`, `bench.out`
+- paper-like content panes inside a dark compiler-console shell
+- monospace-first styling, ANSI-like colors, plain borders, no desktop chrome
 
 ## Notes
 

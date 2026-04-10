@@ -35,7 +35,7 @@
 
 .result-title {
     margin-bottom: 0.55rem;
-    color: #33ff33;
+    color: var(--green);
     font-size: 1.05rem;
     text-transform: uppercase;
 }
@@ -58,18 +58,18 @@
 
 .sim-row {
     padding: 0.5rem;
-    background: #101010;
-    border: 1px solid #4a4a4a;
+    background: #0b100b;
+    border: 1px solid rgba(136, 240, 136, 0.22);
 }
 
 .sim-row strong {
-    color: #ffffff;
+    color: var(--amber-soft);
 }
 
 .sim-bar {
     height: 0.85rem;
     margin-top: 0.35rem;
-    background: #2d2d2d;
+    background: #1d261d;
 }
 
 .sim-bar-fill {
@@ -79,11 +79,11 @@
 }
 
 .sim-bar-fill.cpp {
-    background: #00aa00;
+    background: var(--green-strong);
 }
 
 .sim-bar-fill.java {
-    background: #aa0000;
+    background: var(--red);
 }
 
 @media (max-width: 640px) {

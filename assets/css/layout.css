@@ -1,11 +1,23 @@
 body {
     min-width: 320px;
     font-family: var(--ui);
-    color: var(--text);
+    color: var(--ink);
     background:
-        linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.04) 75%, transparent 75%, transparent),
-        var(--bg);
-    background-size: 16px 16px;
+        radial-gradient(circle at top, rgba(136, 240, 136, 0.08), transparent 28%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(180deg, #040804 0%, #07110a 100%);
+    background-size: auto, 20px 20px, 20px 20px, auto;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(rgba(255, 255, 255, 0.02), transparent 2px, transparent 4px);
+    background-size: 100% 4px;
+    opacity: 0.22;
 }
 
 a {
@@ -29,18 +41,17 @@ a {
 }
 
 .page-section {
-    padding: 0.65rem 0;
+    padding: 0.8rem 0;
 }
 
 .topbar {
     position: sticky;
     top: 0;
     z-index: 20;
-    background: var(--desktop);
-    border-top: 2px solid var(--panel-light);
-    border-left: 2px solid var(--panel-light);
-    border-right: 2px solid var(--panel-darker);
-    border-bottom: 2px solid var(--panel-darker);
+    background: rgba(2, 6, 3, 0.95);
+    border-bottom: 1px solid rgba(136, 240, 136, 0.28);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(6px);
 }
 
 .topbar-inner {
@@ -58,16 +69,15 @@ a {
     font-weight: 700;
     letter-spacing: 0.03em;
     font-size: 0.94rem;
+    color: var(--green);
 }
 
 .brand-led {
     width: 0.85rem;
     height: 0.85rem;
-    background: #00ff00;
-    border-top: 1px solid #e0ffe0;
-    border-left: 1px solid #e0ffe0;
-    border-right: 1px solid #004400;
-    border-bottom: 1px solid #004400;
+    background: var(--green-strong);
+    border: 1px solid #b8ffb8;
+    box-shadow: 0 0 10px rgba(136, 240, 136, 0.75);
     animation: blink-led 1.5s step-end infinite;
 }
 
@@ -85,20 +95,18 @@ a {
     justify-content: center;
     min-height: 2rem;
     padding: 0.2rem 0.8rem;
-    background: var(--panel);
-    border-top: 2px solid var(--panel-light);
-    border-left: 2px solid var(--panel-light);
-    border-right: 2px solid var(--panel-darker);
-    border-bottom: 2px solid var(--panel-darker);
-    box-shadow: var(--shadow);
+    color: var(--amber-soft);
+    background: rgba(16, 27, 18, 0.95);
+    border: 1px solid rgba(217, 168, 79, 0.42);
     font-size: 0.82rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
 }
 
 .site-nav a:hover,
 .site-nav a.is-active,
 .menu-toggle:hover {
-    background: #e6e2da;
+    color: var(--bg-dark);
+    background: var(--amber-soft);
 }
 
 .menu-toggle {
@@ -108,11 +116,8 @@ a {
 
 .statusbar {
     margin-top: 0.8rem;
-    background: var(--desktop);
-    border-top: 2px solid var(--panel-light);
-    border-left: 2px solid var(--panel-light);
-    border-right: 2px solid var(--panel-darker);
-    border-bottom: 2px solid var(--panel-darker);
+    background: rgba(2, 6, 3, 0.96);
+    border-top: 1px solid rgba(136, 240, 136, 0.22);
 }
 
 .statusbar-inner {
@@ -124,10 +129,12 @@ a {
     flex-wrap: wrap;
     padding: 0.3rem 0;
     font-size: 0.8rem;
+    color: var(--green);
 }
 
 .status-link {
     text-decoration: underline;
+    color: var(--amber-soft);
 }
 
 .grid-two,
@@ -190,11 +197,8 @@ a {
         right: 0.6rem;
         display: none;
         padding: 0.55rem;
-        background: var(--desktop);
-        border-top: 2px solid var(--panel-light);
-        border-left: 2px solid var(--panel-light);
-        border-right: 2px solid var(--panel-darker);
-        border-bottom: 2px solid var(--panel-darker);
+        background: rgba(2, 6, 3, 0.98);
+        border: 1px solid rgba(217, 168, 79, 0.42);
     }
 
     .site-nav.is-open {
